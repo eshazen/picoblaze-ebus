@@ -1,0 +1,35 @@
+# ebus_types.yml
+# This defines type(s) used for a local control bus
+
+# enable automatic generation of convert functions for basic types,
+# and include some standard IEEE libraries
+config:
+    basic_convert_functions : on
+    packages:
+      - IEEE:
+        - std_logic_1164
+        - numeric_std
+        - math_real
+
+types:
+
+  - EBUS_ADDR_WIDTH: [qualifier: constant, type: integer, value: 32]  # address bus width
+  - EBUS_DATA_WIDTH: [qualifier: constant, type: integer, value: 32]  # data bus width
+  - EBUS_PORT_COUNT: [qualifier: constant, type: integer, value: 4] # number of ports
+
+# EBUS outputs from master to slave
+  - ebus_out_t:
+      - addr: [type: unsigned, length: EBUS_ADDR_WIDTH] # address out
+      - data: [type: logic, length: EBUS_DATA_WIDTH] # write data
+      - wr: [type: logic]                               # write request
+      - rd: [type: logic]                               # read request
+
+# EBUS inputs from slave to master
+  - ebus_in_t:
+      - data: [type: logic, length: EBUS_DATA_WIDTH] # read data
+      - ack: [type: logic]      # positive acknowledge (mandatory)
+      - nack: [type: logic]     # negative acknowledge (optional)
+
+# array of EBUS inputs
+  - ebus_in_group_t: [type: ebus_in_t, array: EBUS_PORT_COUNT]   # ebus input array for mux
+  
