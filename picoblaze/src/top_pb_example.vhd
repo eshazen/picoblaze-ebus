@@ -32,11 +32,11 @@ use work.bus_multiplexer_pkg.all;
 entity top_pb_example is
 
   port (
-    clk25            : in  std_logic;   -- 25MHz oscillator
+    clk100 : in std_logic;              -- 100MHz oscillator
 
-    UART_rx          : in  std_logic;   --  Serial Input
-    UART_tx          : out std_logic;   --  Serial output
-    LED              : out std_logic_vector(2 downto 0)    -- LEDs
+    UART_rx : in  std_logic;                    --  Serial Input
+    UART_tx : out std_logic;                    --  Serial output
+    LED     : out std_logic_vector(2 downto 0)  -- LEDs
     );
 end entity top_pb_example;
 
@@ -55,17 +55,17 @@ architecture arch of top_pb_example is
 -------------------------------------------------------------------------------------------
 --
 
-  component clk25_250_100 is
-    port (
-      clk0      : out std_logic;
-      clk1      : out std_logic;
-      clk2      : out std_logic;
-      clk3      : out std_logic;
-      clkout100 : out std_logic;
-      reset     : in  std_logic;
-      locked    : out std_logic;
-      clk_in1   : in  std_logic);
-  end component clk25_250_100;
+--  component clk25_250_100 is
+--    port (
+--      clk0      : out std_logic;
+--      clk1      : out std_logic;
+--      clk2      : out std_logic;
+--      clk3      : out std_logic;
+--      clkout100 : out std_logic;
+--      reset     : in  std_logic;
+--      locked    : out std_logic;
+--      clk_in1   : in  std_logic);
+--  end component clk25_250_100;
 
   component pico_ebus is
     port (
@@ -151,64 +151,6 @@ architecture arch of top_pb_example is
 
   signal event : std_logic;
 
-  signal s_select : std_logic;          -- '1' selects serializer core, 
-  -- '0' selects bit-bang
-
-  signal s_sdata, s_sclk : std_logic;
-  signal s_start, s_busy : std_logic;
-  signal s_test_strobe   : std_logic;
-
--- auto-generated signal list for each pin
-  signal s_A_T              : std_logic_vector(31 downto 0);
-  signal s_B_T              : std_logic_vector(31 downto 0);
-  signal s_A_NOR32T_oc      : std_logic;
-  signal s_A_NOR32_oc       : std_logic;
-  signal s_A_OR32           : std_logic;
-  signal s_A_PS_global_trig : std_logic;
-  signal s_A_PS_modeb_ext   : std_logic;
-  signal s_A_Raz_Chn        : std_logic;
-  signal s_A_Val_Evt        : std_logic;
-  signal s_A_clk_read       : std_logic;
-  signal s_A_clk_sr         : std_logic;
-  signal s_A_digital_output : std_logic;
-  signal s_A_hold_hg        : std_logic;
-  signal s_A_hold_lg        : std_logic;
-  signal s_A_load_sc        : std_logic;
-  signal s_A_pwr_on         : std_logic;
-  signal s_A_resetb_pa      : std_logic;
-  signal s_A_resetb_read    : std_logic;
-  signal s_A_rstb_PSC       : std_logic;
-  signal s_A_rstb_sr        : std_logic;
-  signal s_A_select         : std_logic;
-  signal s_A_srin_read      : std_logic;
-  signal s_A_srin_sr        : std_logic;
-  signal s_A_srout_read     : std_logic;
-  signal s_A_srout_sr       : std_logic;
-  signal s_B_NOR32T_oc      : std_logic;
-  signal s_B_NOR32_oc       : std_logic;
-  signal s_B_OR32           : std_logic;
-  signal s_B_PS_global_trig : std_logic;
-  signal s_B_PS_modeb_ext   : std_logic;
-  signal s_B_Raz_Chn        : std_logic;
-  signal s_B_Val_Evt        : std_logic;
-  signal s_B_clk_read       : std_logic;
-  signal s_B_clk_sr         : std_logic;
-  signal s_B_digital_output : std_logic;
-  signal s_B_hold_hg        : std_logic;
-  signal s_B_hold_lg        : std_logic;
-  signal s_B_load_sc        : std_logic;
-  signal s_B_pwr_on         : std_logic;
-  signal s_B_resetb_pa      : std_logic;
-  signal s_B_resetb_read    : std_logic;
-  signal s_B_rstb_PSC       : std_logic;
-  signal s_B_rstb_sr        : std_logic;
-  signal s_B_select         : std_logic;
-  signal s_B_srin_read      : std_logic;
-  signal s_B_srin_sr        : std_logic;
-  signal s_B_srout_read     : std_logic;
-  signal s_B_srout_sr       : std_logic;
-  signal s_UART_rx          : std_logic;
-  signal s_UART_tx          : std_logic;
 
   -- for now these must be powers of two
   constant N_STATUS  : integer := 4;  -- number of 32-bit status registers in ebus_slave_gpio
@@ -221,158 +163,23 @@ begin
 
   reset <= '0';                         -- hopefully not needed
 
--- 
--- (auto-generated)
--- assign pins to internal signals
---
-  s_A_T              <= A_T;
-  s_B_T              <= B_T;
-  s_A_NOR32T_oc      <= A_NOR32T_oc;
-  s_A_NOR32_oc       <= A_NOR32_oc;
-  s_A_OR32           <= A_OR32;
-  A_PS_global_trig   <= s_A_PS_global_trig;
-  A_PS_modeb_ext     <= s_A_PS_modeb_ext;
-  A_Raz_Chn          <= s_A_Raz_Chn;
-  A_Val_Evt          <= s_A_Val_Evt;
-  A_clk_read         <= s_A_clk_read;
-  A_clk_sr           <= s_A_clk_sr;
-  s_A_digital_output <= A_digital_output;
-  A_hold_hg          <= s_A_hold_hg;
-  A_hold_lg          <= s_A_hold_lg;
-  A_load_sc          <= s_A_load_sc;
-  A_pwr_on           <= s_A_pwr_on;
-  A_resetb_pa        <= s_A_resetb_pa;
-  A_resetb_read      <= s_A_resetb_read;
-  A_rstb_PSC         <= s_A_rstb_PSC;
-  A_rstb_sr          <= s_A_rstb_sr;
-  A_select           <= s_A_select;
-  A_srin_read        <= s_A_srin_read;
-  A_srin_sr          <= s_A_srin_sr;
-  s_A_srout_read     <= A_srout_read;
-  s_A_srout_sr       <= A_srout_sr;
-  s_B_NOR32T_oc      <= B_NOR32T_oc;
-  s_B_NOR32_oc       <= B_NOR32_oc;
-  s_B_OR32           <= B_OR32;
-  B_PS_global_trig   <= s_B_PS_global_trig;
-  B_PS_modeb_ext     <= s_B_PS_modeb_ext;
-  B_Raz_Chn          <= s_B_Raz_Chn;
-  B_Val_Evt          <= s_B_Val_Evt;
-  B_clk_read         <= s_B_clk_read;
-  B_clk_sr           <= s_B_clk_sr;
-  s_B_digital_output <= B_digital_output;
-  B_hold_hg          <= s_B_hold_hg;
-  B_hold_lg          <= s_B_hold_lg;
-  B_load_sc          <= s_B_load_sc;
-  B_pwr_on           <= s_B_pwr_on;
-  B_resetb_pa        <= s_B_resetb_pa;
-  B_resetb_read      <= s_B_resetb_read;
-  B_rstb_PSC         <= s_B_rstb_PSC;
-  B_rstb_sr          <= s_B_rstb_sr;
-  B_select           <= s_B_select;
-  B_srin_read        <= s_B_srin_read;
-  B_srin_sr          <= s_B_srin_sr;
-  s_B_srout_read     <= B_srout_read;
-  s_B_srout_sr       <= B_srout_sr;
-  s_UART_rx          <= UART_rx;
-  UART_tx            <= s_UART_tx;
+  LED <= ctrl_regs(0)(31 downto 29);
 
--- 
--- pass inputs to status(0..3)
--- note that these are at address 2..5 on the ebus
---
-  status_regs(0) <= s_A_T;
-  status_regs(1) <= s_B_T;
+  clk <= clk100;
 
-  status_regs(2)(0) <= s_A_NOR32T_oc;
-  status_regs(2)(1) <= s_A_NOR32_oc;
-  status_regs(2)(2) <= s_A_OR32;
-  status_regs(2)(3) <= s_A_digital_output;
-  status_regs(2)(4) <= s_A_srout_read;
-  status_regs(2)(5) <= s_A_srout_sr;
-
-  -- board ID
-  status_regs(2)(31 downto 24) <= x"f0";
-
-  status_regs(3)(0) <= s_B_NOR32T_oc;
-  status_regs(3)(1) <= s_B_NOR32_oc;
-  status_regs(3)(2) <= s_B_OR32;
-  status_regs(3)(3) <= s_B_digital_output;
-  status_regs(3)(4) <= s_B_srout_read;
-  status_regs(3)(5) <= s_B_srout_sr;
-
---
--- set outputs from ctrl(0)
---
-  s_A_PS_global_trig <= ctrl_regs(0)(0);
-  s_A_PS_modeb_ext   <= ctrl_regs(0)(1);
-  s_A_Raz_Chn        <= ctrl_regs(0)(2);
-  s_A_Val_Evt        <= ctrl_regs(0)(3);
-  s_A_clk_read       <= ctrl_regs(0)(4);
-
-  with s_select select
-    s_A_clk_sr <=
-    ctrl_regs(0)(5) when '0',
-    s_sclk          when others;
-
-  with s_select select
-    s_A_srin_sr <=
-    ctrl_regs(0)(16) when '0',
-    s_sdata          when others;
-
-  with s_select select
-    s_B_clk_sr <=
-    ctrl_regs(1)(5) when '0',
-    s_sclk          when others;
-
-  with s_select select
-    s_B_srin_sr <=
-    ctrl_regs(1)(16) when '0',
-    s_sdata          when others;
-
-  s_A_hold_hg     <= ctrl_regs(0)(6);
-  s_A_hold_lg     <= ctrl_regs(0)(7);
-  s_A_load_sc     <= ctrl_regs(0)(8);
-  s_A_pwr_on      <= ctrl_regs(0)(9);
-  s_A_resetb_pa   <= ctrl_regs(0)(10);
-  s_A_resetb_read <= ctrl_regs(0)(11);
-  s_A_rstb_PSC    <= ctrl_regs(0)(12);
-  s_A_rstb_sr     <= ctrl_regs(0)(13);
-  s_A_select      <= ctrl_regs(0)(14);
-  s_A_srin_read   <= ctrl_regs(0)(15);
-
-  s_B_PS_global_trig <= ctrl_regs(1)(0);
-  s_B_PS_modeb_ext   <= ctrl_regs(1)(1);
-  s_B_Raz_Chn        <= ctrl_regs(1)(2);
-  s_B_Val_Evt        <= ctrl_regs(1)(3);
-  s_B_clk_read       <= ctrl_regs(1)(4);
-
-  s_B_hold_hg     <= ctrl_regs(1)(6);
-  s_B_hold_lg     <= ctrl_regs(1)(7);
-  s_B_load_sc     <= ctrl_regs(1)(8);
-  s_B_pwr_on      <= ctrl_regs(1)(9);
-  s_B_resetb_pa   <= ctrl_regs(1)(10);
-  s_B_resetb_read <= ctrl_regs(1)(11);
-  s_B_rstb_PSC    <= ctrl_regs(1)(12);
-  s_B_rstb_sr     <= ctrl_regs(1)(13);
-  s_B_select      <= ctrl_regs(1)(14);
-  s_B_srin_read   <= ctrl_regs(1)(15);
-
-  s_select <= ctrl_regs(0)(28);
-  LED      <= ctrl_regs(0)(31 downto 29);
-
---
--- synthesize a 4-phase 100MHz clock from 25MHz oscillator
---
-  clk25_250_100_1 : clk25_250_100
-    port map (
-      clk0      => clk0,
-      clk1      => clk1,
-      clk2      => clk2,
-      clk3      => clk3,
-      clkout100 => clk,
-      reset     => reset,
-      locked    => open,
-      clk_in1   => clk25);
+----
+---- synthesize a 4-phase 100MHz clock from 25MHz oscillator
+----
+--  clk25_250_100_1 : clk25_250_100
+--    port map (
+--      clk0      => clk0,
+--      clk1      => clk1,
+--      clk2      => clk2,
+--      clk3      => clk3,
+--      clkout100 => clk,
+--      reset     => reset,
+--      locked    => open,
+--      clk_in1   => clk25);
 
 --
 -- the Picoblaze bus master (A32/D32)
@@ -434,20 +241,20 @@ begin
       reset    => warm_reset,
       event    => event);
 
-  -- device 3:  serial interface
-  ebus_slave_serialize_1 : entity work.ebus_slave_serialize
-    generic map (
-      EBUS_BASE_ADDR => "3-------")
-    port map (
-      ebus_out        => ebus_out,
-      ebus_in         => ebus_in_group(3),
-      clk             => clk,
-      reset           => warm_reset,
-      sclk            => s_sclk,
-      test_strobe_out => s_test_strobe,
-      sdata           => s_sdata,
-      busy            => s_busy,
-      start           => s_start);
+--  -- device 3:  serial interface
+--  ebus_slave_serialize_1 : entity work.ebus_slave_serialize
+--    generic map (
+--      EBUS_BASE_ADDR => "3-------")
+--    port map (
+--      ebus_out        => ebus_out,
+--      ebus_in         => ebus_in_group(3),
+--      clk             => clk,
+--      reset           => warm_reset,
+--      sclk            => s_sclk,
+--      test_strobe_out => s_test_strobe,
+--      sdata           => s_sdata,
+--      busy            => s_busy,
+--      start           => s_start);
 
 end arch;
 
