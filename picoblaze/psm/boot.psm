@@ -1,0 +1,162 @@
+	;; boot.psm - stand-alone UUE loader for testing
+;;; I/O port addresses
+	
+;;; UART ports (not used here but included for completeness)
+
+;;; input ports
+        CONSTANT UART_status_port, 00             ; Read status	(n/a this file)
+        CONSTANT UART_RX6_input_port, 01	  ; rx data (n/a this file)
+	CONSTANT clock_freq_in_mhz, 02		  ; system clock frequency in MHz
+	CONSTANT get_peek_data_low, 03 ; program data low bits
+	CONSTANT get_peek_data_mid, 04 ; program data middle bits
+	CONSTANT get_peek_data_high, 05 ; ; program data upper bits
+
+;;; output ports
+	CONSTANT UART_TX6_output_port, 80
+        CONSTANT set_baud_rate_lsb, 01 ; baud rate divisor, low byte
+	CONSTANT set_baud_rate_msb, 02 ; baud rate divisor, high byte
+	CONSTANT set_peek_addr_lsb, 03	; program RAM address low bits
+	CONSTANT set_peek_addr_msb, 04  ; program RAM address high bits
+	CONSTANT set_poke_data_low, 05  ; program RAM write data latch lsb
+	CONSTANT set_poke_data_mid, 06  ; program RAM write data latch lsb
+	CONSTANT set_poke_data_high, 07  ; program RAM write data latch msb (triggers write)
+
+	address 380
+
+start:	
+	;; set 9600 baud (651 decimal for 100MHz)
+	;; set 9600 baud (163 decimal for 25MHz)
+	load s0, 139'd
+;	load s0, 163'd
+        output s0, set_baud_rate_lsb
+	load S0, 02
+;	load S0, 00
+        output s0, set_baud_rate_msb	
+        CALL reset_UART_macros
+
+prom:	load s5,"*"
+	call UART_TX
+
+;;; bootloader, expect a file with the following:
+;
+; +zzz    specify load address for subsequent data
+; =zzz    specify data to load starting at address
+;         (usually repeated)
+; $zzz    jump to specified address (marks end of file)
+;
+cmd_B:	call UART_RX_wait
+	load s6, s5
+	compare s6, "+"
+	jump z, boot_addr
+	compare s6, "="
+	jump z, boot_data
+	compare s6, "$"
+	jump nz, cmd_B		; ignore any garbage characters
+
+;;; get Jump address
+	call UART_TX
+
+	call read_uue		; get data to s6, s7, s8
+	jump nz, err
+	jump@ (s7,s6)
+	
+;	jump 0
+	
+;;; get address into registers sA, sB
+boot_addr:
+	call UART_TX
+	call read_uue
+	jump nz, err
+	load sA, s6
+	load sB, s7
+	jump prom
+
+;;; get data, store in program RAM
+boot_data:
+	call UART_TX
+	call read_uue
+	jump nz, err
+	output sA, set_peek_addr_lsb
+	output sB, set_peek_addr_msb
+	output s6, set_poke_data_low
+	output s7, set_poke_data_mid
+	output s8, set_poke_data_high
+	;; increment address in sA, sB
+	add sA, 01
+	addcy sB, 00
+	jump prom
+
+;;; read 3 bytes from UART
+;;; validate as UUE characters in range 20-5F
+;;; extract 6 data bits from each, form 18 bit word (MSB received first)
+;;; return 18 bits in s6 (low 8 bits), s7 (mid 8 bits) and s8 (high 2 bits)
+;;; NZ on error
+read_uue:
+	call one_uue		; get one UUE to s4 (upper 2 bits)
+	jump nz, bad1
+;	return nz
+	load s8, s4		; copy to s8
+	sr0 s8			; shift data (17,16) over to (1,0)
+	sr0 s8
+	sr0 s8
+	sr0 s8			; done with s8
+	load s7, s4
+	sl0 s7			; shift 4 bits over to place in s7
+	sl0 s7
+	sl0 s7
+	sl0 s7
+	;; done with first byte
+	call one_uue
+	jump nz,bad2
+;	return nz
+	load s5, s4		; copy to s5
+	sr0 s5			; bits 2-5 of 2nd byte go to bits 0-3 of s7
+	sr0 s5
+	or s7, s5		; now s7 is good
+	rr s4			; bits (1,0) of 2nd byte to to bits (7,6) of s6
+	rr s4
+	load s6, 00
+	or s6, s4
+	and s6, c0
+	;; done with second byte
+	call one_uue
+	jump nz,bad3
+;	return nz
+	or s6, s4		;this likely sets nz
+	;; done with third byte
+	xor s0, s0		; force Z set
+	return
+
+bad1:	load s5, "1"
+bad11:	call UART_TX
+	jump prom
+
+bad2:	load s5, "2"
+	call UART_TX
+	jump prom
+
+bad3:	load s5, "3"
+	call UART_TX
+	jump prom
+
+	
+
+;;; receive one UUE character
+;;; Z set if valid; NZ on error
+one_uue:
+	call UART_RX_wait	; receive character to s5
+	sub s5, 20		; must be in range 20-5f
+	return c		; will be nz as well, flagging error
+	compare s5, 40
+	return nc
+	and s5, 3f
+	load s4, s5
+	xor s0, s0		; force Z set
+	return
+	
+err:	load s5, "E"
+	call UART_TX
+	jump cmd_B
+
+        INCLUDE "uart_interface_routines.psm"
+	

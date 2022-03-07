@@ -1,0 +1,229 @@
+;;;
+;;; UART utility functions
+;;;
+;;; send_message - transmit message with address in [sB, sA] in flash to UART
+;;; send_CR - send CR to UART (uses s0, s1, s2, s5)
+;;; send_space - send space (uses s0, s1, s2, s5)
+;;; send_decimal_digit - send value (0-9) in s5 as decimal (uses s0, s1, s2, s5)
+;;; send_hex_byte - send value in s4 as 2-digit hex (uses s0, s5)
+;;; send_hex_scratch_bytes - print s7 bytes from scratch at s8
+;;; 
+;;; recv_hex_char - receive a hex character in 20, ignore/beep non-hex chars
+;;; recv_hex_byte - receive a two digit hex value to s4
+
+;;; (Dan's code!)
+;;; convert ascii 0-9, a-f, A-F to binary 0-f
+;;; set C if valid, NC if error
+;;; uses only s5
+ascii_to_hex:	
+	SUB s5,30		; Drop s5 to 0-9 if the number was ascii 0-9
+	;; if some lower character, throw an error
+	JUMP C, util_char_to_nibble_error
+
+	COMPARE s5,0A		; check for 0-9
+	;; jump to finish if nibble in range 0-9
+	JUMP C, util_char_to_nibble_finish
+	
+	SUB s5, 11	     	; Move ASCII A to zero and see if we roll over
+	;; if some lower character, throw an error
+	JUMP C, util_char_to_nibble_error
+	
+	ADD s5, 0A		; add 10 to bring ascii A-F to dec 10-15
+	COMPARE s5,10		; compare to dec 16
+	;; Jump to finish if nibble in range A-F
+	JUMP C, util_char_to_nibble_finish
+	
+	SUB s5,2A		; bring ASCII a-f to dec 0-5
+	;; if some lower character, throw an error
+	JUMP C, util_char_to_nibble_error
+	
+	ADD s5, 0A		; bring a-f to 10-15
+	COMPARE s5,10		; compare to dec 16
+	;; Jump to finish if nibble in range a-f
+	JUMP C, util_char_to_nibble_finish	
+	;; other values are errors
+util_char_to_nibble_error:
+	;; conversion failed, return s5=0 and C = 0
+	LOAD s5, 00
+	SR0 s5
+	RETURN
+util_char_to_nibble_finish:
+	;; by my 1337 skillz (AKA: pure luck as I get to the part in the code),
+	;; C already is 1 and s5 is set... so return!
+	RETURN
+	
+recv_hex_char:
+	CALL UART_RX_wait
+	CALL UART_TX
+	CALL ascii_to_hex
+	RETURN C
+
+;;; send ^G (beep) on invalid char
+recv_bad:	
+	LOAD s5,07
+	CALL UART_TX
+	JUMP recv_hex_char
+	
+;;; convert two characters in (s1, s0) to hex byte
+;;; (not tested)
+ascii_to_hex_byte:	
+	load s5, s1
+	call ascii_to_hex
+	return nc
+	LOAD s4, s5		; byte to s4
+        SL0 s4
+        SL0 s4
+        SL0 s4
+        SL0 s4
+	load s5, s0
+	call ascii_to_hex
+	return nc
+	or s4, s5
+	return
+
+recv_hex_byte:
+	CALL recv_hex_char
+	LOAD s4, s5		; byte to s4
+        SL0 s4
+        SL0 s4
+        SL0 s4
+        SL0 s4
+	CALL recv_hex_char
+	OR s4, s5
+	RETURN
+
+;;;
+;;;
+;;;------------------------------------------------------------------------------------------
+;;; Send a message to the UART
+;;;------------------------------------------------------------------------------------------
+;;;
+;;; A message is transmitted to the USB-UART.
+;;; The start address of the message must be provided in [sB,sA].
+;;; Terminate the transmission with a NULL character (00 hex).
+;;;
+send_message:
+	CALL@ (sB, sA)
+        COMPARE s5, 00                            ;terminate on NUL character
+        RETURN Z
+        CALL UART_TX
+        ADD sA, 1'd
+        ADDCY sB, 0'd
+        JUMP send_message
+
+;;; send a message, replacing '$' with CR/LF pairs
+send_msg_crlf:
+	CALL@ (sB, sA)
+        COMPARE s5, 00                            ;terminate on NUL character
+	RETURN Z
+	COMPARE s5, 24		; compare with '$'
+	JUMP NZ, sendm1
+	CALL send_CR
+	JUMP sendm2
+sendm1: CALL UART_TX
+sendm2: ADD sA, 1'd
+        ADDCY sB, 0'd
+        JUMP send_msg_crlf
+
+
+;;;
+;;;
+;;;------------------------------------------------------------------------------------------
+;;; Send Carriage Return and Linefeed to UART
+;;;------------------------------------------------------------------------------------------
+;;;
+;;; Registers used s0, s1, s2, and s5.
+;;;
+send_CR:
+	LOAD s5, CR
+	CALL UART_TX
+	LOAD s5, LF
+        JUMP UART_TX                              ;includes RETURN
+
+;;;
+;;;------------------------------------------------------------------------------------------
+;;; Send a Space to UART
+;;;------------------------------------------------------------------------------------------
+;;;
+;;; Registers used s0, s1, s2, and s5.
+;;;
+send_space:
+	LOAD s5, " "
+        JUMP UART_TX                              ;includes RETURN
+;;;
+;;;
+;;;------------------------------------------------------------------------------------------
+;;; Send decimal digit to UART
+;;;------------------------------------------------------------------------------------------
+;;;
+;;; The value provided in register s5 should be in the range 00 to 09 hex and this will
+;;; be converted to the corresponding decimal character and sent to the UART
+;;;
+;;; Registers used s0, s1, s2, and s5.
+;;;
+send_decimal_digit:
+	ADD s5, "0"                               ;convert to ASCII character
+        JUMP UART_TX                              ;includes RETURN
+;;;
+;;;
+;;;------------------------------------------------------------------------------------------
+;;; Send Hex Value of Byte to UART
+;;;------------------------------------------------------------------------------------------
+;;;
+;;; Value provided in register 's4' is sent as ASCII HEX to the UART transmitter.
+;;;
+;;; Registers used s0, s4 (preserved) and s5.
+;;;
+send_hex_byte:
+	LOAD s5, s4                               ;isolate upper nibble
+        SR0 s5
+        SR0 s5
+        SR0 s5
+        SR0 s5
+        CALL hex_to_ASCII                         ; convert to ASCII
+        CALL UART_TX                              ;send upper digit to UART
+        LOAD s5, s4                               ;isolate lower nibble
+        AND s5, 0F
+        CALL hex_to_ASCII                         ; convert to ASCII
+        CALL UART_TX                              ;send lower digit to UART
+        RETURN 
+;;;
+;;; Convert value 00 to 0F provided in 's5' into ASCII character in 's5'
+;;;
+;;; Register used s5
+;;;
+hex_to_ASCII:
+	SUB s5, 0A                                ;test if value is in range 0 to 9
+        JUMP C, number_char
+        ADD s5, 07                                ;ASCII char A to F in range 41 to 46
+number_char:
+	ADD s5, 3A                                ;ASCII char 0 to 9 in range 30 to 40
+        RETURN 
+
+
+;;;
+;;; print in hex s7 bytes from scratch at s8
+;;; reverse the order for little-endian display
+;;; 
+send_hex_scratch_bytes:
+	add s8, s7		;point to last plus one
+shsb:	sub s8, 01
+	fetch s4, (s8)
+	call send_hex_byte
+	sub s7, 01
+	return z
+	jump shsb
+	
+;;;
+;;; read s7 bytes from ports at s8
+;;; reverse the order for little-endian display
+;;; 
+send_hex_input_bytes:
+	add s8, s7		;point to last plus one
+shib:	sub s8, 01
+	input s4, (s8)
+	call send_hex_byte
+	sub s7, 01
+	return z
+	jump shib
+	

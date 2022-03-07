@@ -1,0 +1,55 @@
+;;; memory / port utility routines
+;;;
+;;; all routines assume little-endian storage
+;;; 
+;;; increment_scratch   -- increment integer at s8 (length in s7)
+;;; output_scratch      -- write port group
+;;;                        s8 = scratch addr  s9 = port addr  s7 = count
+;;; copy_scratch        -- copy scratch data from s8 to s9, s7 = count
+;;; bzero               -- zero scratch memory at sA, sC = count (uses s9)
+;;; print_scratch       -- send null-terminated string from s8 to UART
+
+print_scratch:
+	fetch s5, (s8)
+	or s5, s5               ; set zero
+	return z
+	call UART_TX
+	add s8, 01
+	jump print_scratch
+
+bzero:	load s9, 00
+	store s9, (sA)		; zero the buffer locn
+	add sA, 01
+	sub sC, 01
+	jump nz, bzero
+	return
+
+increment_scratch:
+	fetch s0, (s8)
+	add s0, 01
+	store s0, (s8)
+	return nc		; we're done if no carry
+
+	add s8, 01		; point to next location
+	sub s7, 01		; decrement length
+	jump nz, increment_scratch
+	return
+
+output_scratch:			;uses s0, s7, s8, s9
+	fetch s0, (s8)		; get data byte to output
+	output s0, (s9)		; output it
+	add s8, 01		; point to next byte
+	add s9, 01		; increment port number
+	sub s7, 01		; decrement count
+	jump nz, output_scratch	; loop till done
+	return
+	
+copy_scratch:
+	fetch s0, (s8)
+	store s0, (s9)
+	add s8, 01
+	add s9, 01
+	sub s7, 01
+	jump nz, copy_scratch
+	return
+	

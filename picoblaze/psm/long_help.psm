@@ -1,0 +1,31 @@
+
+; detailed help
+; note that we use send_msg_crlf so '$' gets replaced with CR/LF
+
+; there isn't any easy multi-line string facility
+	STRING help1$, "S [(start) [(count)]]   - dump scratchpad memory$"
+	STRING help2$, "p [(start) [(count)]]   - dump program memory$"
+	STRING help3$, "e (addr) (data)         - edit program memory (one word)$"
+	STRING help4$, "i (port) [(count)]      - read I/O port(s)$"
+	STRING help5$, "o (port) (data)         - write I/O port$"
+	STRING help6$, "j (addr)                - jump to address$"
+	STRING help7$, "w (addr) (data)         - write to e-bus$"
+	STRING help8$, "r (addr) [(count)]      - read from e-bus$"
+	STRING help9$, "b                       - start UUE bootloader$"
+	STRING helpA$, "c (data) (len)          - write CITIROC serial$"
+        String helpB$, "v (div)                 - set baud rate diVisor$"
+	
+long_help_msg:
+	LOAD&RETURN s5, help1$
+	LOAD&RETURN s5, help2$
+	LOAD&RETURN s5, help3$
+	LOAD&RETURN s5, help4$
+	LOAD&RETURN s5, help5$
+	LOAD&RETURN s5, help6$
+	LOAD&RETURN s5, help7$
+	LOAD&RETURN s5, help8$
+	LOAD&RETURN s5, help9$
+	LOAD&RETURN s5, helpA$
+	LOAD&RETURN s5, helpB$
+	LOAD&RETURN s5, NUL	; null-terminate the end
+	

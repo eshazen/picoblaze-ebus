@@ -1,0 +1,780 @@
+;;;
+;;; Utility monitor for picoblaze
+;;;
+;;; command line parser, expects command followed by 1-4 arguments
+;;; for arguments:
+;;;   offset, length stored for each
+;;;   attempts hex conversion up to 4 bytes for each
+;;; 
+;;; commands:
+;;;   S [<start> [<count>]]     - dump scratchpad memory
+;;;   p [<start> [<count>]]     - dump program memory
+;;;   e <addr> <data>           - edit program memory (one word)
+;;;   i <port> [<count>]        - read I/O port(s)
+;;;   o <port> <data>           - write I/O ports
+;;;   j <addr>                  - jump to address
+;;; 
+;;;   w <addr> <data>           - write to e-bus
+;;;   r <addr> [<count>]        - read from e-bus
+;;;
+;;;   c <data> <count>          - send CITIROC serial data
+;;;                               (set CLKDIV first)
+;;;   b                         - start UUE bootloader
+;;;
+;;;   t                         - test various things
+;;;   v <rate>                  - set line (baud) divisor
+;;;                               (2 bytes, 16X rate divider for 100MHz)
+;;;                               (so 0286 for 9600, 0036 for 115200 etc)
+
+;;; I/O port addresses
+	
+;;; UART ports (not used here but included for completeness)
+
+;;; input ports
+        CONSTANT UART_status_port, 00             ; Read status	(n/a this file)
+        CONSTANT UART_RX6_input_port, 01	  ; rx data (n/a this file)
+	CONSTANT clock_freq_in_mhz, 02		  ; system clock frequency in MHz
+	CONSTANT get_peek_data_low, 03 ; program data low bits
+	CONSTANT get_peek_data_mid, 04 ; program data middle bits
+	CONSTANT get_peek_data_high, 05 ; ; program data upper bits
+
+	CONSTANT trigger_ebus_read, 07 ; trigger ebus read cycle
+
+;;; output ports
+	CONSTANT UART_TX6_output_port, 80
+        CONSTANT set_baud_rate_lsb, 01 ; baud rate divisor, low byte
+	CONSTANT set_baud_rate_msb, 02 ; baud rate divisor, high byte
+	CONSTANT set_peek_addr_lsb, 03	; program RAM address low bits
+	CONSTANT set_peek_addr_msb, 04  ; program RAM address high bits
+	CONSTANT set_poke_data_low, 05  ; program RAM write data latch lsb
+	CONSTANT set_poke_data_mid, 06  ; program RAM write data latch lsb
+	CONSTANT set_poke_data_high, 07  ; program RAM write data latch msb (triggers write)
+
+	CONSTANT set_ebus_addr_0, 08 ; e-bus address byte 0
+	CONSTANT set_ebus_addr_1, 09 ; e-bus address byte 1
+	CONSTANT set_ebus_addr_2, 0a ; e-bus address byte 2
+	CONSTANT set_ebus_addr_3, 0b ; e-bus address byte 3
+
+	CONSTANT ebus_data_0, 0c     ; e-bus data byte 0 (read/write)
+	CONSTANT ebus_data_1, 0d     ; e-bus data byte 1
+	CONSTANT ebus_data_2, 0e     ; e-bus data byte 2
+	CONSTANT ebus_data_3, 0f     ; e-bus data byte 3 (trigger write)
+	
+	CONSTANT reset_port, 10	; issue warm reset
+
+;;; scratchpad (256 bytes)
+;;; 
+	CONSTANT input_pointer, 00 ; buffer count
+	CONSTANT input_buffer, 01 ; input buffer
+	CONSTANT input_last, 1f	  ; end of buffer
+
+	CONSTANT max_tokens, 06	; number of tokens
+	CONSTANT argc, 20	; token count
+	CONSTANT argv, 21	; list of token offsets, up to 8
+	CONSTANT arglen, 28	; list of token lengths, up to 8
+	CONSTANT arglen_1, 29	; length of arg 1
+	CONSTANT arglen_2, 2A	; length of arg 2
+	CONSTANT arglen_3, 2B	; length of arg 3
+	CONSTANT arglen_4, 2C	; length of arg 4
+
+	CONSTANT hexargs, 30	; hex arguments, 4 bytes each
+	CONSTANT hexarg0, 30
+	CONSTANT hexarg0_1, 31	;break out the first few to all bytes
+	CONSTANT hexarg0_2, 32
+	CONSTANT hexarg0_3, 33
+	CONSTANT hexarg1, 34
+	CONSTANT hexarg1_1, 35
+	CONSTANT hexarg1_2, 36
+	CONSTANT hexarg1_3, 37
+	CONSTANT hexarg2, 38
+	CONSTANT hexarg2_1, 39
+	CONSTANT hexarg2_2, 3a
+	CONSTANT hexarg2_3, 3b
+	CONSTANT hexarg3, 3c
+	CONSTANT hexarg4, 40
+	CONSTANT hexarg5, 44
+
+;;; free space for now 48-73
+
+;;; command history 80-ff
+	CONSTANT cmd_next, 7f	; offset for next history buffer, 0-3
+	CONSTANT cmd_hist, 80
+	CONSTANT hist_count, 04
+	
+
+;;;-------- code starts here -------
+
+;;; jump vectors
+cold_start: 
+	jump start		; 000: cold start
+	jump last		; 001: top of program
+	jump main		; 002: warm start
+	jump UART_RX_wait	; 003: UART input (s5)
+	jump UART_TX		; 004: UART output
+	jump send_hex_byte	; 005: send hex output (s4)
+	jump send_message	; 006: send message from (sA, sB)
+
+	address 20
+
+start:	
+	;; set 9600 baud (651 decimal for 100MHz) (2, 139)
+	;; set 9600 baud (163 decimal for 25MHz)
+	load s0, 139'd
+;	load s0, 163'd
+        output s0, set_baud_rate_lsb
+	load S0, 02
+;	load S0, 00
+        output s0, set_baud_rate_msb	
+
+;;; zero entire scratchpad
+	load sA, 00
+	load sC, 00
+	call bzero
+
+        CALL reset_UART_macros
+	output s0, reset_port	; reset external logic
+
+        CALL welcome_message
+
+;;; prompt for input command
+main:	load s5, ">"
+	call UART_TX
+	load s8, input_buffer	;set pointer to buffer start
+	
+m_inch:	call UART_RX_wait	;get char
+	compare s5, 08		;backspace
+	jump z, m_back
+	compare s5, 0d		;CR?
+	jump z, m_done
+	compare s5, 10		;^P ?
+	jump z, m_prev
+	compare s5, 0e		;^N ?
+	jump z, m_next
+	compare s5, 20		;other control?
+	jump c, m_inch		;yes, ignore
+
+	compare s8, input_last	;end of buffer
+	jump z, m_inch
+
+	call UART_TX		;echo it
+	store s5, (s8)		;store in buffer
+	add s8, 01
+	jump m_inch
+
+;;; cursor up to previous line
+m_prev:	load s8, 80
+	load s9, 00
+	load s7, 20
+	call copy_scratch
+	load s8, input_buffer
+	call print_scratch
+	jump m_inch
+
+m_next:	jump m_prev
+
+m_back:	compare s8, input_buffer ; at start of buffer?
+	jump z, m_inch		 ; yes, ignore BS
+	sub s8, 01		 ; else move back
+	call UART_TX		 ; echo BS
+	jump m_inch
+
+;;; got CR
+m_done:	call send_CR
+	load s0, 00
+	store s0, (s8)		; null-terminate string
+	store s8, input_pointer
+
+	;; copy to save buffer
+;;;	fetch sA, cmd_next	; pointer to next buffer
+;;;	load s9, sA		; save in s9
+;;;	add sA, 01		; increment pointer
+;;;	and sA, 03		; wrap at 4
+;;;	store sA, cmd_next	; save for next time
+;;;	;; multiply s9 by $20 to point to buffer
+;;;	sl0 s9			; *02
+;;;	sl0 s9			; *04
+;;;	sl0 s9			; *08
+;;;	sl0 s9			; *10
+;;;	sl0 s9			; *20
+;;;	add s9, cmd_hist	; now we point to active buffer
+	
+	load s9, cmd_hist	; for now just copy to one buffer
+	load s8, input_pointer
+	load s7, 20
+	call copy_scratch	; copy from s8 to s9 (count=s7)
+	
+;;; 
+;;; parse tokens until NUL seen
+;;; 
+	load s8, input_buffer	; parse here
+	load sA, argv		; store argument pointers here
+	load sB, arglen		; store argument lengths here
+
+	;; zero the argument buffer
+	load sC, 0f		; count to zero
+	call bzero		; zero sC bytes at sA using s9
+	
+	load sA, argv		; reset sA
+	load s9, 00		; count arguments
+
+;;; if space, skip over it quietly
+;;; if printable, mark as start of token
+;;; if NUL, quit now
+ftok:	
+	fetch s0, (s8)		; get a character
+	compare s0, 00		; Null?
+	jump z, toklen
+	compare s0, 20		; is it a space?
+	jump nz, nosp		; nope, start of token
+	add s8, 01		; advance pointer past space
+	jump ftok		; keep looking
+;;; not a space, mark start of token and increment count
+nosp:	add s9, 01		; increment argc
+	store s8, (sA)		; store argv
+	add sA, 01		; increment argv pointer
+	load sC, s8		; remember start of argument in sC
+;;; now loop looking for either NUL or space => end of argument
+etok:	fetch s0, (s8)		; get a character
+	add s8, 01		; advance pointer
+	compare s0, 00		; NUL?
+	jump z, toklen		; yes, go calculate length
+	compare s0, 20		; space?
+	jump nz, etok		; no, keep looking
+
+	;; we got here either because s0 == NUL or s0 == " "
+	;; calculate and store the token length, then
+	;; figure out which
+toklen:	
+	load sD, s8		; get current pointer
+	sub sD, sC		; calculate length
+	sub sD, 01		; correct offset
+	store sD, (sB)		; store length
+	add sB, 01		; increment length pointer
+
+	compare s0,00		; re-check for NUL
+	jump z, parse_end	; if NUL, we're done
+
+	compare s9, max_tokens	; max token count reached?
+	jump nz, ftok
+	
+parse_end:
+	store s9, argc
+
+;;;
+;;; convert tokens to hex
+;;;
+	fetch s9, argc		; count arguments
+	load sA, argv		; argument pointers here
+	load sB, hexargs
+
+hxtok:	compare s9, 00		; all done?
+	jump z, hx_end
+	fetch s8, (sA)		; get argv[]
+;;; zero our accumulator (s3...s0)
+	xor s0, s0
+	xor s1, s1
+	xor s2, s2
+	xor s3, s3
+;;; parse hex characters one at a time to end of argument
+hxchar:	fetch s5, (s8)		; get a character
+	add s8, 01		; advance pointer
+	compare s5, 20		; check for space/NUL
+	jump z, hxtokend	; end of token
+	compare s5, 00
+	jump z, hxtokend
+	call ascii_to_hex
+	jump c, is_hex		; yup, it's hex
+	;; not hex, ignore it
+	jump hxchar
+;;; it's hex
+is_hex:		 ; shift entire arg left 4 bits and merge in new digit
+	sl0 s0
+	sla s1
+	sla s2
+	sla s3
+	sl0 s0
+	sla s1
+	sla s2
+	sla s3
+	sl0 s0
+	sla s1
+	sla s2
+	sla s3
+	sl0 s0
+	sla s1
+	sla s2
+	sla s3
+	or s0, s5
+	jump hxchar
+
+;;; end of token (space, NUL)
+hxtokend:	
+	;; store accumulator
+	store s0, (sB)
+	add sB, 01
+	store s1, (sB)
+	add sB, 01
+	store s2, (sB)
+	add sB, 01
+	store s3, (sB)
+	add sB, 01
+	
+	add sA, 01		;get next argv
+	sub s9, 01
+	jump hxtok
+
+hx_end:	
+	
+;;; 
+;;; run command
+;;; initialize s0 to argc
+;;; 
+	fetch s5, input_buffer
+	and s5,5f		;convert command byte only to uppercase
+	fetch s0, argc
+	compare s5, "P"		;command P - dump program
+	jump z, cmd_P
+	compare s5, "S"		;command S - dump scratchpad
+	jump z, cmd_S
+	compare s5, "E"         ;command E - edit program
+	jump z, cmd_E
+	compare s5, "B"		;command B - UUencoded bootloader
+	jump z, cmd_B
+	compare s5, "J"		;command J - jump to address
+	jump z, cmd_J
+	compare s5, "I"		;command I - input port
+	jump z, cmd_I
+	compare s5, "O"		;command O - output port
+	jump z, cmd_O
+	compare s5, "R"		;command R - ebus read
+	jump z, cmd_R
+	compare s5, "W"		;command w - ebus write
+	jump z, cmd_W
+	compare s5, "T"
+	jump z, cmd_T
+	compare s5, "H"
+	jump z, cmd_H
+	compare s5, "C"
+	jump z, cmd_C
+	compare s5, "V"
+	jump z, cmd_V
+
+	;; fall through to error on unknown command
+
+;;; command error
+err:	LOAD sB, error_msg'upper
+	LOAD sA, error_msg'lower
+	CALL send_message
+	jump main
+
+;;; set baud rate
+cmd_V:
+	fetch s6, hexarg1	; get rate lsb
+	fetch s7, hexarg1_1	; get rate msb
+	output s7, set_baud_rate_msb
+	output s6, set_baud_rate_lsb
+	jump main
+
+
+;;; write to CITIROC serial interface
+cmd_C:
+	;; on entry:  hexarg1 has data   (for 30000000)
+	;;            hexarg2 has length (for 30000001)
+	;; we'll use hexarg0 for the address
+	load sA, 30
+	load sB, 00
+	store sA, hexarg0	;first byte = 30
+	store sB, hexarg0_1	;second byte = 00
+	store sB, hexarg0_2	;third byte = 00
+	store sB, hexarg0_3	;last byte = 00
+	;; 
+	load s8, hexarg0
+	call set_ebus_addr	;set address
+
+	load s8, hexarg1	;write the serial data
+	call set_ebus_data
+
+	;; set address to 30000001
+	load sB, 01
+	store sB, hexarg0_3
+
+	load s8, hexarg0
+	call set_ebus_addr	;set address
+
+	load s8, hexarg2	;write length
+	call set_ebus_data
+
+	;; set address to 30000001
+	;; set address to 30000001
+	load sB, 10
+	store sB, hexarg0_3
+
+	load s8, hexarg0
+	call set_ebus_addr	;set address
+
+	load s8, hexarg2	;write arb data to trigger serial output
+	call set_ebus_data
+
+	jump main
+
+cmd_H:	call send_help
+	jump main
+
+;;; test the increment function
+cmd_T:	fetch s8, hexarg1
+	fetch s7, hexarg2
+	call increment_scratch
+	jump cmd_S
+
+;;; write to e-bus
+cmd_W:
+	compare s0, 03		;need address and data
+	jump nz, err
+
+	load s8, hexarg1
+	call set_ebus_addr	;set address
+
+	load s8, hexarg2
+	call set_ebus_data	;this triggers a write
+
+	jump main
+
+;;; read from e-bus 
+;;;   0 args:  re-use last address
+;;;   1 arg:   read from one address
+;;;   2 args:  address and count
+cmd_R:	
+	load sA, 01		;default count
+	compare s0, 03		;was a count specified?
+	jump nz, norai
+	fetch sA, hexarg2	;yes, get count from 2nd arg
+	
+norai:
+	load s8, hexarg1
+	load s7, 4
+	call send_hex_scratch_bytes
+	
+	call send_space
+	
+	load s8, hexarg1
+	call set_ebus_addr
+	
+	;; trigger read
+	input s0, trigger_ebus_read
+
+	;; read and display 4 bytes of data
+	load s8, ebus_data_0
+	load s7, 4
+	call send_hex_input_bytes
+	
+	call send_CR
+	sub sA, 01		;decrement count
+	jump z, main
+	;; increment the address
+	load s8, hexarg1
+	load s7, 4
+	call increment_scratch
+	jump norai
+
+
+;;;; --- set e-bus address from scratch starting at s8
+set_ebus_addr:
+	load s9, set_ebus_addr_0
+setego:	load s7, 4
+	jump output_scratch
+	
+;;; --- set e-bus data from scratch starting at s8
+set_ebus_data:
+	load s9, ebus_data_0
+	jump setego
+
+cmd_I:
+	;; don't check for address since we can re-use the last one
+	fetch s7, hexarg1	;get port address
+	load s8, 01		;default count
+	compare s0, 03		;was a count specified?
+	jump nz, nocoi
+	fetch s8, hexarg2	;yes, get count from 2nd arg
+	
+nocoi:	LOAD s4, s7
+	CALL send_hex_byte	;display address
+	CALL send_space		; then space
+	input s4, (s7)		;read data
+	CALL send_hex_byte	;display
+	call send_CR
+
+	add s7, 01
+	sub s8, 01
+	jump nz,nocoi
+	jump main
+
+;;; output to port(s).
+;;; if value is > 2 hex digits, output to multiple ports, lsb first
+cmd_O:	compare s0, 03		;need addr, data
+	jump nz,err
+	load sA, hexarg2	;point to low byte of data
+	fetch s8, arglen_2	;length of data
+	fetch s6, hexarg1	;get address
+outp1:	
+	fetch s7, (sA)		;get data byte
+	output s7, (s6)
+	add sA, 01		;point to next byte
+	add s6, 01		;increment port address
+	sub s8, 01		;decrement length, 1 digit?
+	jump z, main		;yes, done
+	sub s8, 01		;decrement length, 2 digits?
+	jump nz, outp1
+	jump main
+
+;;; jump
+cmd_J:	fetch s6, hexarg1	; get address lsb
+	fetch s7, hexarg1_1	; get address msb
+	jump@ (s7, s6)
+
+	
+
+;;; bootloader, expect a file with the following:
+;
+; +zzz    specify load address for subsequent data
+; =zzz    specify data to load starting at address
+;         (usually repeated)
+; $zzz    jump to specified address (marks end of file)
+;
+cmd_B:	call UART_RX_wait
+	load s6, s5
+	compare s6, "+"
+	jump z, boot_addr
+	compare s6, "="
+	jump z, boot_data
+	compare s6, "$"
+	jump nz, cmd_B		; ignore any garbage characters
+
+;;; get Jump address, just echo for now
+	call read_uue		; get data to s6, s7, s8
+	jump nz, err
+	load s4, s7
+	call send_hex_byte
+	load s4, s6
+	call phexm
+	jump main
+	
+phexm:	call send_hex_byte
+	jump send_CR
+
+;;; get address into registers sA, sB
+boot_addr:
+	call read_uue
+	jump nz, err
+	load sA, s6
+	load sB, s7
+	jump cmd_B
+
+;;; get data, store in program RAM
+boot_data:
+	call read_uue
+	jump nz, err
+	output sA, set_peek_addr_lsb
+	output sB, set_peek_addr_msb
+	output s6, set_poke_data_low
+	output s7, set_poke_data_mid
+	output s8, set_poke_data_high
+	;; increment address in sA, sB
+	add sA, 01
+	addcy sB, 00
+	jump cmd_B
+
+;;; read 3 bytes from UART
+;;; validate as UUE characters in range 20-5F
+;;; extract 6 data bits from each, form 18 bit word (MSB received first)
+;;; return 18 bits in s6 (low 8 bits), s7 (mid 8 bits) and s8 (high 2 bits)
+;;; NZ on error
+read_uue:
+	call one_uue		; get one UUE to s4 (upper 2 bits)
+	return nz
+	load s8, s4		; copy to s8
+	sr0 s8			; shift data (17,16) over to (1,0)
+	sr0 s8
+	sr0 s8
+	sr0 s8			; done with s8
+	load s7, s4
+	sl0 s7			; shift 4 bits over to place in s7
+	sl0 s7
+	sl0 s7
+	sl0 s7
+	;; done with first byte
+	call one_uue
+	return nz
+	load s5, s4		; copy to s5
+	sr0 s5			; bits 2-5 of 2nd byte go to bits 0-3 of s7
+	sr0 s5
+	or s7, s5		; now s7 is good
+	rr s4			; bits (1,0) of 2nd byte to to bits (7,6) of s6
+	rr s4
+	load s6, 00
+	or s6, s4
+	and s6, c0
+	;; done with second byte
+	call one_uue
+	return nz
+	or s6, s4
+	;; done with third byte
+	xor s0, s0		; force Z set
+	return
+	
+;;; receive one UUE character
+;;; Z set if valid; NZ on error
+one_uue:
+	call UART_RX_wait	; receive character to s5
+	sub s5, 20		; must be in range 20-5f
+	return c		; will be nz as well, flagging error
+	compare s5, 40
+	return nc
+	and s5, 3f
+	load s4, s5
+	xor s0, s0		; force Z set
+	return
+	
+
+
+;;; edit one word of program RAM
+cmd_E:	compare s0, 03
+	jump nz, err
+	fetch s6, hexarg1	; get address lsb
+	fetch s7, hexarg1_1	; get address msb
+	OUTPUT s6, set_peek_addr_lsb
+	OUTPUT s7, set_peek_addr_msb
+
+	fetch s6, hexarg2	; get data lsb
+	OUTPUT s6, set_poke_data_low
+	fetch s6, hexarg2_1
+	OUTPUT s6, set_poke_data_mid
+	fetch s6, hexarg2_2
+	OUTPUT s6, set_poke_data_high
+	jump main
+
+;;; dump scratchpad
+cmd_S:	load s6, 00		;default address
+	load s8, 7f		;default count
+	compare s0, 02		; address specified?
+	jump c, sp_go
+	fetch s6, hexarg1
+	compare s0, 03		; count specified?
+	jump c, sp_go
+	fetch s8, hexarg2
+	sub s8, 01
+	
+sp_go:	
+	call sp_dump
+	call send_CR
+	jump main
+
+;;; dump program ROM
+cmd_P:				;defaults:
+	LOAD s6, 00		; address low
+	LOAD s7, 00		; address high
+	LOAD s8, 10		; word count
+
+	compare s0, 02		; address specified?
+	jump c, dp_go		; nope
+	fetch s6, hexarg1	; get address lsb
+	fetch s7, hexarg1_1	; get address msb
+	compare s0, 03		;count specified?
+	jump c,dp_go
+	fetch s8,hexarg2	;get count
+
+dp_go:	
+	call pr_dump
+	jump main
+
+;;;
+;;; dump program RAM to terminal
+;;; (s7,s6) = address  s8 = word count
+;;; 
+pr_dump:
+	OUTPUT s6, set_peek_addr_lsb
+	OUTPUT s7, set_peek_addr_msb
+
+	LOAD s4, s7		; display address
+	CALL send_hex_byte
+	LOAD s4, s6
+	CALL send_hex_byte
+	CALL send_space		; then space
+
+	INPUT s4, get_peek_data_high ;display 3 bytes of data
+	CALL send_hex_byte
+	INPUT s4, get_peek_data_mid
+	CALL send_hex_byte
+	INPUT s4, get_peek_data_low
+	CALL send_hex_byte
+	CALL send_CR
+
+	ADD s6, 01		;increment address low
+	ADDCY s7, 00		;increment address hight
+;	ADDCY s8, 00            ; what's this?
+
+	SUB s8, 01		;loop over word count
+	JUMP C, main
+	JUMP pr_dump
+
+;;;
+;;; dump scratchpad to terminal
+;;; s6 = address  s8 = byte count
+;;;
+sp_dump:
+	load s4, s6
+	call send_hex_byte	;display address
+	call send_space
+	call send_space
+sp_db:	fetch s4, (s6)
+	call send_hex_byte
+	call send_space
+sp_nocr:
+	add s6, 01		;increment address
+	sub s8, 01
+	return c
+	;; end of line?
+	test s6, 0f		;16 bytes done?
+	jump nz, sp_db
+	call send_CR
+	jump sp_dump
+
+welcome_message:
+	LOAD sB, welcome_msg'upper
+	LOAD sA, welcome_msg'lower
+	CALL send_message
+	HWBUILD s5                                ;hardware version defines ASCII letter
+	CALL UART_TX
+	RETURN 
+
+send_help:
+	LOAD sB, long_help_msg'upper
+	LOAD sA, long_help_msg'lower
+	CALL send_msg_crlf
+	RETURN
+
+welcome_msg:
+	LOAD&RETURN s5, welcome$
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, LF
+	LOAD&RETURN s5, NUL
+
+error_msg:
+	LOAD&RETURN s5, error$
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, LF
+	LOAD&RETURN s5, NUL
+	
+help_msg:
+	LOAD&RETURN s5, help1$
+	LOAD&RETURN s5, NUL
+
+STRING welcome$, "Monitor V2.1"	
+STRING error$, "Error"	
+
+        INCLUDE "uart_interface_routines.psm"
+	INCLUDE "uart_utility.psm"
+	INCLUDE "memory_utility.psm"
+	INCLUDE "long_help.psm"
+	
+last:	load s0,s0
+	

@@ -1,0 +1,38 @@
+	;;
+	;; demo.psm -- load-able program for testing
+	;;
+
+	;; jump vectors
+	address 000
+start:	
+	address 001
+last:	
+	address 002
+warm:
+	address 003
+UART_RX_wait:	
+	address 004
+UART_TX:
+	address 005
+send_hex_byte:
+	address 006
+send_message:	
+	
+	address 200		; above monitor
+
+	load sB, test_str'upper
+	load sA, test_str'lower
+	call send_message
+
+	jump warm
+
+test_str:
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, hello$
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, CR
+	LOAD&RETURN s5, NUL
+	
+	STRING hello$, "Just a demo"
+	
