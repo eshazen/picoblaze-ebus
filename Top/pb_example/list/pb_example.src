@@ -16,4 +16,3 @@ picoblaze/src/ebus_slave_gpio.vhd
 picoblaze/src/ebus_slave_mux.vhd
 picoblaze/src/ebus_slave_gen.vhd
 picoblaze/src/ebus_slave_rate.vhd
-IP/clk25_250_100/clk25_250_100.xci
