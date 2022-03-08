@@ -90,7 +90,8 @@ architecture arch of top_pb_example is
     generic (
       EBUS_BASE_ADDR : string(1 to 8);
       NUM_CONTROL    : integer;
-      NUM_STATUS     : integer);
+      NUM_STATUS     : integer;
+      NUM_ACTION     : integer);
     port (
       ebus_out   : in  ebus_out_t;
       ebus_in    : out ebus_in_t;
@@ -98,7 +99,7 @@ architecture arch of top_pb_example is
       reset      : in  std_logic;
       ctrl_reg   : out bus_array(NUM_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
       status_reg : in  bus_array(NUM_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
-      action_reg : out bus_array(NUM_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0));
+      action_reg : out bus_array(NUM_ACTION-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0));
   end component ebus_slave_gpio;
 
   component ebus_slave_gen is
