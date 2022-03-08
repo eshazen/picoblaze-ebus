@@ -32,10 +32,11 @@ use work.bus_multiplexer_pkg.all;
 entity top_pb_example is
 
   port (
-    clk100 : in std_logic;              -- 100MHz oscillator
-    uart_rx : in  std_logic;                    --  Serial Input
-    uart_tx : out std_logic;                    --  Serial output
-    led     : out std_logic_vector(2 downto 0)  -- LEDs
+    clk100  : in  std_logic;                     -- 100MHz oscillator
+    uart_rx : in  std_logic;                     --  Serial Input
+    uart_tx : out std_logic;                     --  Serial output
+    sw      : in  std_logic_vector(15 downto 0);
+    led     : out std_logic_vector(15 downto 0)  -- LEDs
     );
 end entity top_pb_example;
 
@@ -152,7 +153,7 @@ architecture arch of top_pb_example is
 
 
   -- for now these must be powers of two
-  constant N_STATUS  : integer := 4;  -- number of 32-bit status registers in ebus_slave_gpio
+  constant N_STATUS  : integer := 2;  -- number of 32-bit status registers in ebus_slave_gpio
   constant n_CONTROL : integer := 2;  -- number of 32-bit control registers in ebus_slave_gpio
 
   signal ctrl_regs   : bus_array(N_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
@@ -162,23 +163,10 @@ begin
 
   reset <= '0';                         -- hopefully not needed
 
-  led <= ctrl_regs(0)(31 downto 29);
+  led                         <= ctrl_regs(0)(15 downto 0);
+  status_regs(0)(15 downto 0) <= sw;
 
   clk <= clk100;
-
-----
----- synthesize a 4-phase 100MHz clock from 25MHz oscillator
-----
---  clk25_250_100_1 : clk25_250_100
---    port map (
---      clk0      => clk0,
---      clk1      => clk1,
---      clk2      => clk2,
---      clk3      => clk3,
---      clkout100 => clk,
---      reset     => reset,
---      locked    => open,
---      clk_in1   => clk25);
 
 --
 -- the Picoblaze bus master (A32/D32)
