@@ -32,11 +32,12 @@ use work.bus_multiplexer_pkg.all;
 entity top_pb_example is
 
   port (
-    clk100  : in  std_logic;                     -- 100MHz oscillator
-    uart_rx : in  std_logic;                     --  Serial Input
-    uart_tx : out std_logic;                     --  Serial output
+    clk100  : in  std_logic;                      -- 100MHz oscillator
+    uart_rx : in  std_logic;                      --  Serial Input
+    uart_tx : out std_logic;                      --  Serial output
     sw      : in  std_logic_vector(15 downto 0);
-    led     : out std_logic_vector(15 downto 0)  -- LEDs
+    led     : out std_logic_vector(15 downto 0);  -- LEDs
+    JA      : out std_logic_vector(7 downto 0)
     );
 end entity top_pb_example;
 
@@ -96,7 +97,8 @@ architecture arch of top_pb_example is
       clk        : in  std_logic;
       reset      : in  std_logic;
       ctrl_reg   : out bus_array(NUM_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
-      status_reg : in  bus_array(NUM_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0));
+      status_reg : in  bus_array(NUM_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
+      action_reg : out bus_array(NUM_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0));
   end component ebus_slave_gpio;
 
   component ebus_slave_gen is
@@ -154,10 +156,12 @@ architecture arch of top_pb_example is
 
   -- for now these must be powers of two
   constant N_STATUS  : integer := 2;  -- number of 32-bit status registers in ebus_slave_gpio
-  constant n_CONTROL : integer := 2;  -- number of 32-bit control registers in ebus_slave_gpio
+  constant N_CONTROL : integer := 2;  -- number of 32-bit control registers in ebus_slave_gpio
+  constant N_ACTION  : integer := 1;  -- number of 32-bit action registers in ebus_slave_gpio
 
   signal ctrl_regs   : bus_array(N_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
   signal status_regs : bus_array(N_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
+  signal action_regs : bus_array(N_ACTION-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
 
 begin
 
@@ -165,6 +169,7 @@ begin
 
   led                         <= ctrl_regs(0)(15 downto 0);
   status_regs(0)(15 downto 0) <= sw;
+  JA                          <= action_regs(0)(7 downto 0);
 
   clk <= clk100;
 
@@ -196,14 +201,16 @@ begin
     generic map (
       EBUS_BASE_ADDR => "0-------",
       NUM_CONTROL    => N_CONTROL,
-      NUM_STATUS     => N_STATUS)
+      NUM_STATUS     => N_STATUS,
+      NUM_ACTION     => N_ACTION)
     port map (
       ebus_out   => ebus_out,
       ebus_in    => ebus_in_group(0),
       clk        => clk,
       reset      => warm_reset,
       ctrl_reg   => ctrl_regs,
-      status_reg => status_regs);
+      status_reg => status_regs,
+      action_reg => action_regs);
 
   -- device 1:  rate meter test
   ebus_slave_rate_1 : ebus_slave_rate
