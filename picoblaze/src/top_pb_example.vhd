@@ -188,8 +188,8 @@ begin
     port map (
       clk        => clk,
       reset      => reset,
-      RX         => s_UART_Rx,
-      TX         => s_UART_Tx,
+      RX         => UART_Rx,
+      TX         => UART_Tx,
       warm_reset => warm_reset,
       ebus_out   => ebus_out,
       ebus_in    => ebus_in);
