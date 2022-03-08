@@ -33,10 +33,9 @@ entity top_pb_example is
 
   port (
     clk100 : in std_logic;              -- 100MHz oscillator
-
-    UART_rx : in  std_logic;                    --  Serial Input
-    UART_tx : out std_logic;                    --  Serial output
-    LED     : out std_logic_vector(2 downto 0)  -- LEDs
+    uart_rx : in  std_logic;                    --  Serial Input
+    uart_tx : out std_logic;                    --  Serial output
+    led     : out std_logic_vector(2 downto 0)  -- LEDs
     );
 end entity top_pb_example;
 
@@ -163,7 +162,7 @@ begin
 
   reset <= '0';                         -- hopefully not needed
 
-  LED <= ctrl_regs(0)(31 downto 29);
+  led <= ctrl_regs(0)(31 downto 29);
 
   clk <= clk100;
 
@@ -188,8 +187,8 @@ begin
     port map (
       clk        => clk,
       reset      => reset,
-      RX         => UART_Rx,
-      TX         => UART_Tx,
+      RX         => uart_rx,
+      TX         => uart_tx,
       warm_reset => warm_reset,
       ebus_out   => ebus_out,
       ebus_in    => ebus_in);

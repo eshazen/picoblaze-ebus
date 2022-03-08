@@ -1,0 +1,2395 @@
+
+************************************************
+               _  _           ___ __ ___ ___   _
+  (\____/)    | || |___  __ _|_  )  \_  )_  ) / |
+  / @__@ \    | __ / _ \/ _` |/ / () / / / / _| |
+ (  (oo)  )   |_||_\___/\__, /___\__/___/___(_)_|
+     ~~                 |___/
+     
+                ---------------            
+Copyright 2018-2022 The University of Birmingham
+************************************************
+ Version: Hog2022.1-2
+
+/home/hazen/work/picoblaze-ebus
+[0m HOG:Info select_command_from_line()   Recognised Vivado project [0m
+[0m HOG:Info main()  Using executable: /opt/Xilinx/Vivado/2020.2/bin/vivado [0m
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/launchers/launch_workflow.tcl -notrace
+INFO: [Hog:Msg-0] Will launch implementation and write bitstream...
+INFO: [Hog:Msg-0] Number of jobs set to 4.
+INFO: [Hog:Msg-0] Found project file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.xpr for pb_example.
+INFO: [Hog:Msg-0] Opening existing project file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.xpr...
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory '/home/hazen/work/picoblaze-ebus/IP_repository'.
+Scanning sources...
+Finished scanning sources
+INFO: [Hog:Msg-0] Skipping syntax check for project pb_example
+INFO: [Hog:Msg-0] Resetting run before launching synthesis...
+[Tue Mar  8 10:43:24 2022] Launched synth_1...
+Run output will be captured here: /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/synth_1/runme.log
+[Tue Mar  8 10:43:24 2022] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log top_pb_example.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_pb_example.tcl
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source top_pb_example.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository '/home/hazen/work/picoblaze-ebus/IP_repository'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2020.2/data/ip'.
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/pre-synthesis.tcl
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+CRITICAL WARNING: [Hog:GetVer-0] Empty SHA found for /home/hazen/work/picoblaze-ebus/IP_repository. Commit to Git to resolve this warning.
+CRITICAL WARNING: [Hog:GetVerFromSHA-0] Empty SHA found
+INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_example-v0.0.1-9-g8be7f50-dirty...
+INFO: [Hog:Msg-0] Opening project pb_example...
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory '/home/hazen/work/picoblaze-ebus/IP_repository'.
+Scanning sources...
+Finished scanning sources
+INFO: [Hog:Msg-0] Checking pb_example list files...
+INFO: [Hog:Msg-0] List Files matches project. Nothing to do.
+INFO: [Hog:Msg-0] /home/hazen/work/picoblaze-ebus/Top_new//pb_example/hog.conf matches project. Nothing to do
+INFO: [Hog:Msg-0] List files and hog.conf match project. All ok!
+INFO: [Hog:Msg-0] All done.
+INFO: [Hog:Msg-0] Evaluating non committed changes...
+WARNING: [Hog:Msg-0] Found non committed changes:...
+ picoblaze/con/Basys-3-Master.xdc |  9 ++++-----
+ picoblaze/src/top_pb_example.vhd | 13 ++++++-------
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+CRITICAL WARNING: [Hog:Msg-0] Repository is not clean, will use current SHA (8be7f50) and create a dirty bitfile...
+CRITICAL WARNING: [Hog:FileCommitted-0] File /home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd is not in the git repository. Please add it with:
+ git add /home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd
+CRITICAL WARNING: [Hog:Msg-0] picoblaze/psm/my_ROM.vhd is not in the git repository. Will use current SHA (8be7f50) and version will be set to 0.
+INFO: [Hog:Msg-0] Git describe for 00000000 is: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Disabling multithreading to assure deterministic bitfile
+INFO: [Hog:Msg-0] Opening version file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/versions.txt...
+ ------------------------- PRE SYNTHESIS -------------------------
+ 08/03/2022 at 10:43:35
+ Firmware date and time: 08032022, 00102935
+ Global SHA: 8be7f50, VER: 0.0.0
+ Constraints SHA: 8325FD3, VER: 0.0.2
+ Top SHA: 8BCC1A8, VER: 0.0.2
+ Hog SHA: 60BA50C, VER: 5.10.2
+ --- Libraries ---
+ pb_example SHA: 8BE7F50, VER: 0.0.2
+ --- User IP Repositories ---
+ IP_repository SHA: , VER: 0.0.0
+ -----------------------------------------------------------------
+INFO: [Hog:CheckYmlRef-0] .gitlab-ci.yml not found in /home/hazen/work/picoblaze-ebus. Skipping this step
+INFO: [Hog:Msg-0] Sourcing user pre-synthesis file ./Top//pb_example/pre-synthesis.tcl
+make: Nothing to be done for 'all'.
+rm -f *.fmt *.hex *.log my_ROM.vhd *.mon *.uue
+echo "building monitor.hex"
+building monitor.hex
+/home/hazen/.local/bin/opbasm -6 -x monitor.psm
+OPBASM - Open PicoBlaze Assembler 1.3
+Running in PicoBlaze-6 mode
+  Device configuration:
+    Memory size: 4096, Scratchpad size: 256
+
+  Reading source: monitor.psm
+  Reading source: uart_interface_routines.psm
+  Reading source: uart_utility.psm
+  Reading source: memory_utility.psm
+  Reading source: long_help.psm
+
+  Assembling code... 
+  SUCCESS
+
+    1157 instructions out of 4096 (28%)
+    Highest occupied address: 49D hex
+
+  Writing output
+           mem map: monitor.hex
+          log file: monitor.log
+
+  Formatted source:
+    monitor.fmt
+    uart_interface_routines.fmt
+    uart_utility.fmt
+    memory_utility.fmt
+    long_help.fmt
+
+echo "my_ROM.vhd"
+my_ROM.vhd
+/usr/bin/perl hex_to_rom.pl monitor.hex my_ROM_template.vhd 2048 > my_ROM.vhd
+INFO: [Hog:Msg-0] All done.
+Command: synth_design -top top_pb_example -part xc7a50tcsg325-2
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a50t'
+INFO: [Device 21-403] Loading part xc7a50tcsg325-2
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 1 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 3381987
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2354.992 ; gain = 0.000 ; free physical = 1022 ; free virtual = 55855
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'top_pb_example' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:48]
+WARNING: [Synth 8-3819] Generic 'GLOBAL_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GLOBAL_TIME' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GLOBAL_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GLOBAL_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TOP_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TOP_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'HOG_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'HOG_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CON_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CON_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'XML_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'XML_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PB_EXAMPLE_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PB_EXAMPLE_SHA' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IP_REPOSITORY_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IP_REPOSITORY_SHA' not present in instantiated entity will be ignored
+INFO: [Synth 8-3491] module 'pico_ebus' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:46' bound to instance 'pico_ebus_1' of component 'pico_ebus' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:186]
+INFO: [Synth 8-638] synthesizing module 'pico_ebus' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:60]
+	Parameter hwbuild bound to: 8'b01000010 
+	Parameter interrupt_vector bound to: 12'b011111111111 
+	Parameter scratch_pad_memory_size bound to: 256 - type: integer 
+INFO: [Synth 8-3491] module 'kcpsm6' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:87' bound to instance 'processor' of component 'kcpsm6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:239]
+INFO: [Synth 8-638] synthesizing module 'kcpsm6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:111]
+	Parameter hwbuild bound to: 8'b01000010 
+	Parameter interrupt_vector bound to: 12'b011111111111 
+	Parameter scratch_pad_memory_size bound to: 256 - type: integer 
+	Parameter INIT bound to: 64'b1111111111111111111101010101010100000000000000000000111011101110 
+INFO: [Synth 8-113] binding component instance 'reset_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:685]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'run_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:696]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'internal_reset_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:701]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'sync_sleep_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:706]
+	Parameter INIT bound to: 64'b0000000010000011000000000000101100000000110001000000000001001100 
+INFO: [Synth 8-113] binding component instance 't_state_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:711]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 't_state1_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:722]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 't_state2_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:727]
+	Parameter INIT bound to: 64'b0000000000010000000000000000000000000000000000000000100000000000 
+INFO: [Synth 8-113] binding component instance 'int_enable_type_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:733]
+	Parameter INIT bound to: 64'b0000000000000000000000000000000000000000000000001100101010101010 
+INFO: [Synth 8-113] binding component instance 'interrupt_enable_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:744]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'interrupt_enable_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:754]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'sync_interrupt_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:759]
+	Parameter INIT bound to: 64'b1100110000110011111111110000000010000000100000001000000010000000 
+INFO: [Synth 8-113] binding component instance 'active_interrupt_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:764]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'active_interrupt_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:775]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'interrupt_ack_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:780]
+	Parameter INIT bound to: 64'b0101101000111100111111111111111100000000000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_move_is_valid_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:804]
+	Parameter INIT bound to: 64'b0111011101110111000000100111011100000000000000000000001000000000 
+INFO: [Synth 8-113] binding component instance 'move_type_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:814]
+	Parameter INIT bound to: 64'b0000000000000000111100000000000000000000000000000010001111111111 
+INFO: [Synth 8-113] binding component instance 'pc_mode1_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:825]
+	Parameter INIT bound to: 64'b1111111111111111111111111111111100000000000001000000000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_mode2_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:836]
+	Parameter INIT bound to: 64'b1111111111111111000100000000000000000000000000000010000000000000 
+INFO: [Synth 8-113] binding component instance 'push_pop_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:846]
+	Parameter INIT bound to: 64'b0000001111001010000000000000000000000100001000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'alu_decode0_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:861]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'alu_mux_sel0_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:872]
+	Parameter INIT bound to: 64'b0111011100001000000000000000000000000000000000000000111100000000 
+INFO: [Synth 8-113] binding component instance 'alu_decode1_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:877]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'alu_mux_sel1_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:888]
+	Parameter INIT bound to: 64'b1101000000000000000000000000000000000010000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'alu_decode2_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:894]
+	Parameter INIT bound to: 64'b0000000000000001001111110011111100000000000100001111011111001110 
+INFO: [Synth 8-113] binding component instance 'register_enable_type_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:909]
+	Parameter INIT bound to: 64'b1100000011001100000000000000000010100000101010100000000000000000 
+INFO: [Synth 8-113] binding component instance 'register_enable_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:920]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'flag_enable_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:931]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'register_enable_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:937]
+	Parameter INIT bound to: 64'b1000000000000000000000000000000000100000000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'spm_enable_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:943]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'k_write_strobe_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:954]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'spm_enable_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:960]
+	Parameter INIT bound to: 64'b0100000000000000000000000000000000000001000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'read_strobe_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:966]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'write_strobe_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:977]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'read_strobe_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:983]
+	Parameter INIT bound to: 64'b0000000010000000000000100000000000000000000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'regbank_type_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1001]
+	Parameter INIT bound to: 64'b1010110010101100111111110000000011111111000000001111111100000000 
+INFO: [Synth 8-113] binding component instance 'bank_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1011]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'bank_flop' to cell 'FDR' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1021]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'sx_addr4_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1027]
+INFO: [Synth 8-113] binding component instance 'arith_carry_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1051]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'arith_carry_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1056]
+	Parameter INIT bound to: 64'b0000000000000000000000000000000010000111011110000000000000000000 
+INFO: [Synth 8-113] binding component instance 'lower_parity_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1061]
+INFO: [Synth 8-113] binding component instance 'parity_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1072]
+	Parameter INIT bound to: 64'b0110100110010110100101100110100110010110011010010110100110010110 
+INFO: [Synth 8-113] binding component instance 'upper_parity_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1078]
+INFO: [Synth 8-113] binding component instance 'parity_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1088]
+	Parameter INIT bound to: 64'b1111111111111111101010101100110011110000111100001111000011110000 
+INFO: [Synth 8-113] binding component instance 'shift_carry_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1093]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'shift_carry_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1103]
+	Parameter INIT bound to: 64'b0011001100110011101010101100110011110000101010100000000000000000 
+INFO: [Synth 8-113] binding component instance 'carry_flag_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1108]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'carry_flag_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1119]
+INFO: [Synth 8-113] binding component instance 'init_zero_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1126]
+	Parameter INIT bound to: 64'b1010001010000000000000000000000000000000111100000000000011110000 
+INFO: [Synth 8-113] binding component instance 'use_zero_flag_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1132]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'use_zero_flag_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1143]
+	Parameter INIT bound to: 64'b0000000000000000000000000000000000000000000000000000000000000001 
+INFO: [Synth 8-113] binding component instance 'lower_zero_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1148]
+INFO: [Synth 8-113] binding component instance 'lower_zero_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1159]
+	Parameter INIT bound to: 64'b0000000000000000000000000000110100000000000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'middle_zero_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1165]
+INFO: [Synth 8-113] binding component instance 'middle_zero_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1176]
+	Parameter INIT bound to: 64'b1111101111111111000000000000000000000000000000000000000000000000 
+INFO: [Synth 8-113] binding component instance 'upper_zero_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1182]
+INFO: [Synth 8-113] binding component instance 'upper_zero_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1192]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'zero_flag_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1198]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+INFO: [Synth 8-113] binding component instance 'pc_vector_mux_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1264]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111100110011110011000000111100000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1350]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1366]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1371]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+INFO: [Synth 8-113] binding component instance 'pc_vector_mux_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1264]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+INFO: [Synth 8-113] binding component instance 'pc_vector_mux_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1264]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+INFO: [Synth 8-113] binding component instance 'pc_vector_mux_lut' to cell 'LUT6_2' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1264]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Synth 8-113] binding component instance 'pc_xorcy' to cell 'XORCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1426]
+INFO: [Synth 8-113] binding component instance 'pc_muxcy' to cell 'MUXCY' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1440]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'return_vector_flop' to cell 'FD' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1249]
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'pc_flop' to cell 'FDRE' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1309]
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+INFO: [Synth 8-113] binding component instance 'pc_lut' to cell 'LUT6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:1411]
+INFO: [Common 17-14] Message 'Synth 8-113' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000010101010000000001111111111001100110011001111000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_R_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000010101010000000000000000011001100110011001111000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT_A bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_B bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_C bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_D bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT_A bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_B bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_C bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_D bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000010101001010011010101010101010101010101010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000101010001001010010101010101010101010101010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000101010001001010010101010101010101010101010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000101010001001010010101010101010101010101010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000101010001001010010101010101010101010101010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1011111110111100100011111000110010110011101100001000001110000000 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b1 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b1 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110100101101001011011101000101011001100110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT_A bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_B bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_C bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_D bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+	Parameter INIT_A bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_B bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_C bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter INIT_D bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
+	Parameter IS_WCLK_INVERTED bound to: 1'b0 
+INFO: [Synth 8-256] done synthesizing module 'kcpsm6' (1#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/kcpsm6.vhd:111]
+INFO: [Synth 8-3491] module 'monitor' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd:10' bound to instance 'program_rom' of component 'monitor' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:262]
+INFO: [Synth 8-638] synthesizing module 'monitor' [/home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'monitor' (2#1) [/home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd:25]
+INFO: [Synth 8-3491] module 'uart_tx6' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_tx6.vhd:84' bound to instance 'txi' of component 'uart_tx6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:281]
+INFO: [Synth 8-638] synthesizing module 'uart_tx6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_tx6.vhd:100]
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111111100000000011111111100000001111111100000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011110000111000011110000011111000011110001111000011110000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1100110010010000011000001100110010101010010100000101000010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111010011111100111101001111110000000100000000000000010011000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000000001000000000000000010000000000000000000000000000000 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1111111100000000111100001111000011001100110011001010101010101010 
+	Parameter INIT bound to: 64'b1100111110101010110011000000111100001111111111111111111111111111 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1000010101010000000000000000000010101010101010101010101010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0010011001100001000000000000000011001100110011001100110011001100 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1000100001110000000000000000000011110000111100001111000011110000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1000011101000100000000000000000011111111000000001111111100000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110110000000000000000000000000001011010000000000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0111111110000000111111110000000001111000011110001111000011110000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000000000000000000000000010000000000000000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-256] done synthesizing module 'uart_tx6' (3#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_tx6.vhd:100]
+INFO: [Synth 8-3491] module 'uart_rx6' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_rx6.vhd:84' bound to instance 'rxi' of component 'uart_rx6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:304]
+INFO: [Synth 8-638] synthesizing module 'uart_rx6' [/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_rx6.vhd:100]
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 16'b0000000000000000 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111111100000000111111100000000011111111100000001111111100000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011110000111000011110000011111000011110001111000011110000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1100110010010000011000001100110010101010010100000101000010101010 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111010011111100111101001111110000000100000000000000010011000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000000000001000000000000000010000000000000000000000000000000 
+	Parameter INIT bound to: 64'b1100110011110000000000000000000010101010110011000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1100101011111111110010101111111100000000000000001100000011000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011001100111111111111111111001100101010101111111111111111 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011001100111111111111111111001100101010101111111111111111 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011001100111111111111111111001100101010101111111111111111 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b1111000011001100111111111111111111001100101010101111111111111111 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0010111100101111101011111010111100000000000000001111111100000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0010001000100010000000001111000000000000000000000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110110000000000000000000000000001011010000000000000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0110110011001100000000000000000001011010101010100000000000000000 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 64'b0000000010000000000000000000000010001000100010001000100010001000 
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-256] done synthesizing module 'uart_rx6' (4#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/uart_rx6.vhd:100]
+INFO: [Synth 8-256] done synthesizing module 'pico_ebus' (5#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/pico_ebus.vhd:60]
+INFO: [Synth 8-3491] module 'ebus_slave_mux' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_mux.vhd:15' bound to instance 'ebus_slave_mux_1' of component 'ebus_slave_mux' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:200]
+INFO: [Synth 8-638] synthesizing module 'ebus_slave_mux' [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_mux.vhd:27]
+WARNING: [Synth 8-614] signal 'ebus_in_group' is read in the process but is not in the sensitivity list [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_mux.vhd:31]
+INFO: [Synth 8-256] done synthesizing module 'ebus_slave_mux' (6#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_mux.vhd:27]
+	Parameter EBUS_BASE_ADDR bound to: 0------- - type: string 
+	Parameter NUM_CONTROL bound to: 2 - type: integer 
+	Parameter NUM_STATUS bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'ebus_slave_gpio' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gpio.vhd:18' bound to instance 'ebus_slave_gpio_1' of component 'ebus_slave_gpio' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:207]
+INFO: [Synth 8-638] synthesizing module 'ebus_slave_gpio' [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gpio.vhd:37]
+	Parameter EBUS_BASE_ADDR bound to: 0------- - type: string 
+	Parameter NUM_CONTROL bound to: 2 - type: integer 
+	Parameter NUM_STATUS bound to: 4 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ebus_slave_gpio' (7#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gpio.vhd:37]
+	Parameter EBUS_BASE_ADDR bound to: 1------- - type: string 
+INFO: [Synth 8-3491] module 'ebus_slave_rate' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_rate.vhd:12' bound to instance 'ebus_slave_rate_1' of component 'ebus_slave_rate' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:221]
+INFO: [Synth 8-638] synthesizing module 'ebus_slave_rate' [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_rate.vhd:29]
+	Parameter EBUS_BASE_ADDR bound to: 1------- - type: string 
+INFO: [Synth 8-638] synthesizing module 'rate_counter' [/home/hazen/work/picoblaze-ebus/picoblaze/src/rate_counter.vhd:33]
+	Parameter CLK_A_1_SECOND bound to: 100000000 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'counter' [/home/hazen/work/picoblaze-ebus/picoblaze/src/counter.vhd:33]
+	Parameter roll_over bound to: 1'b1 
+	Parameter end_value bound to: 32'b00000101111101011110000100000000 
+	Parameter start_value bound to: 32'b00000000000000000000000000000000 
+	Parameter A_RST_CNT bound to: 32'b00000000000000000000000000000000 
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'counter' (8#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/counter.vhd:33]
+INFO: [Synth 8-638] synthesizing module 'counter__parameterized0' [/home/hazen/work/picoblaze-ebus/picoblaze/src/counter.vhd:33]
+	Parameter roll_over bound to: 1'b0 
+	Parameter end_value bound to: 32'b11111111111111111111111111111111 
+	Parameter start_value bound to: 32'b00000000000000000000000000000000 
+	Parameter A_RST_CNT bound to: 32'b00000000000000000000000000000000 
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'counter__parameterized0' (8#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/counter.vhd:33]
+INFO: [Synth 8-638] synthesizing module 'capture_CDC' [/home/hazen/work/picoblaze-ebus/picoblaze/src/capture_CDC.vhd:23]
+	Parameter WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'pacd' [/home/hazen/work/picoblaze-ebus/picoblaze/src/pacd.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'pacd' (9#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/pacd.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'capture_CDC' (10#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/capture_CDC.vhd:23]
+INFO: [Synth 8-256] done synthesizing module 'rate_counter' (11#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/rate_counter.vhd:33]
+INFO: [Synth 8-256] done synthesizing module 'ebus_slave_rate' (12#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_rate.vhd:29]
+	Parameter EBUS_BASE_ADDR bound to: 2------- - type: string 
+INFO: [Synth 8-3491] module 'ebus_slave_gen' declared at '/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gen.vhd:12' bound to instance 'ebus_slave_gen_1' of component 'ebus_slave_gen' [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:233]
+INFO: [Synth 8-638] synthesizing module 'ebus_slave_gen' [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gen.vhd:28]
+	Parameter EBUS_BASE_ADDR bound to: 2------- - type: string 
+INFO: [Synth 8-256] done synthesizing module 'ebus_slave_gen' (13#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/ebus_slave_gen.vhd:28]
+INFO: [Synth 8-256] done synthesizing module 'top_pb_example' (14#1) [/home/hazen/work/picoblaze-ebus/picoblaze/src/top_pb_example.vhd:48]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2354.992 ; gain = 0.000 ; free physical = 1709 ; free virtual = 56544
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2354.992 ; gain = 0.000 ; free physical = 1715 ; free virtual = 56567
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2354.992 ; gain = 0.000 ; free physical = 1715 ; free virtual = 56567
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2354.992 ; gain = 0.000 ; free physical = 1697 ; free virtual = 56551
+INFO: [Netlist 29-17] Analyzing 253 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_pb_example_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/top_pb_example_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2362.844 ; gain = 0.000 ; free physical = 1515 ; free virtual = 56381
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 197 instances were transformed.
+  FD => FDRE: 86 instances
+  FDR => FDRE: 28 instances
+  FDS => FDSE: 2 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 69 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 8 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2362.844 ; gain = 0.000 ; free physical = 1515 ; free virtual = 56381
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1547 ; free virtual = 56426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a50tcsg325-2
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1547 ; free virtual = 56425
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1544 ; free virtual = 56422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1550 ; free virtual = 56429
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 2     
++---XORs : 
+	   2 Input      1 Bit         XORs := 4     
++---Registers : 
+	               32 Bit    Registers := 16    
+	               18 Bit    Registers := 2     
+	               16 Bit    Registers := 1     
+	               12 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 17    
++---RAMs : 
+	              36K Bit	(2048 X 18 bit)          RAMs := 1     
++---Muxes : 
+	  18 Input   32 Bit        Muxes := 2     
+	   4 Input   32 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 9     
+	  18 Input   18 Bit        Muxes := 1     
+	  18 Input   16 Bit        Muxes := 1     
+	  18 Input   12 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 1     
+	  19 Input    8 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 10    
+	  17 Input    1 Bit        Muxes := 3     
+	  19 Input    1 Bit        Muxes := 1     
+	   4 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 120 (col length:60)
+BRAMs: 150 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1556 ; free virtual = 56429
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping	Report (see note below)
++---------------+---------------------------------+-----------+----------------------+------------------+
+|Module Name    | RTL Object                      | Inference | Size (Depth x Width) | Primitives       | 
++---------------+---------------------------------+-----------+----------------------+------------------+
+|top_pb_example | pico_ebus_1/program_rom/RAM_reg | Implied   | 2 K x 18             | RAM128X1D x 288	 | 
++---------------+---------------------------------+-----------+----------------------+------------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1447 ; free virtual = 56321
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1445 ; free virtual = 56318
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping	Report
++---------------+---------------------------------+-----------+----------------------+------------------+
+|Module Name    | RTL Object                      | Inference | Size (Depth x Width) | Primitives       | 
++---------------+---------------------------------+-----------+----------------------+------------------+
+|top_pb_example | pico_ebus_1/program_rom/RAM_reg | Implied   | 2 K x 18             | RAM128X1D x 288	 | 
++---------------+---------------------------------+-----------+----------------------+------------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1442 ; free virtual = 56316
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1453 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |BUFG      |     1|
+|2     |CARRY4    |    41|
+|3     |LUT1      |     2|
+|4     |LUT2      |    13|
+|5     |LUT3      |    74|
+|6     |LUT4      |    52|
+|7     |LUT5      |    78|
+|8     |LUT6      |   350|
+|10    |MUXCY     |    29|
+|11    |MUXF7     |    85|
+|12    |MUXF8     |    36|
+|13    |RAM128X1D |   288|
+|14    |RAM256X1S |     8|
+|15    |RAM32M    |     4|
+|16    |SRL16E    |    16|
+|17    |XORCY     |    27|
+|18    |FD        |    83|
+|19    |FDCE      |   169|
+|20    |FDR       |    28|
+|21    |FDRE      |   546|
+|22    |FDS       |     2|
+|23    |IBUF      |     2|
+|24    |OBUF      |     4|
++------+----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.844 ; gain = 7.852 ; free physical = 1452 ; free virtual = 56326
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2362.844 ; gain = 0.000 ; free physical = 1503 ; free virtual = 56377
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.852 ; gain = 7.852 ; free physical = 1503 ; free virtual = 56377
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2362.852 ; gain = 0.000 ; free physical = 1588 ; free virtual = 56463
+INFO: [Netlist 29-17] Analyzing 700 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2362.852 ; gain = 0.000 ; free physical = 1532 ; free virtual = 56406
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 492 instances were transformed.
+  (MUXCY,XORCY) => CARRY4: 10 instances
+  FD => FDRE: 83 instances
+  FDR => FDRE: 28 instances
+  FDS => FDSE: 2 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 69 instances
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 288 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 8 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+180 Infos, 22 Warnings, 8 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.852 ; gain = 7.992 ; free physical = 1675 ; free virtual = 56549
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/synth_1/top_pb_example.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file top_pb_example_utilization_synth.rpt -pb top_pb_example_utilization_synth.pb
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/post-synthesis.tcl
+group 
+INFO: [Hog:Msg-0] Evaluating Git sha for pb_example...
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+CRITICAL WARNING: [Hog:GetVer-0] Empty SHA found for /home/hazen/work/picoblaze-ebus/IP_repository. Commit to Git to resolve this warning.
+CRITICAL WARNING: [Hog:GetVerFromSHA-0] Empty SHA found
+INFO: [Hog:Msg-0] Git describe set to: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_example-v0.0.1-9-g8be7f50-dirty...
+INFO: [Hog:Msg-0] All done.
+INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 10:44:01 2022...
+[Tue Mar  8 10:44:04 2022] synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2351.020 ; gain = 0.000 ; free physical = 2519 ; free virtual = 57391
+INFO: [Hog:Msg-0] Run: synth_1 progress: 100%, status : synth_design Complete!
+WARNING: [Coretcl 2-176] No IPs found
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+CRITICAL WARNING: [Hog:GetVer-0] Empty SHA found for /home/hazen/work/picoblaze-ebus/IP_repository. Commit to Git to resolve this warning.
+CRITICAL WARNING: [Hog:GetVerFromSHA-0] Empty SHA found
+INFO: [Hog:Msg-0] Git describe set to v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Starting implementation flow...
+INFO: [Hog:Msg-0] Resetting run before launching implementation...
+[Tue Mar  8 10:44:06 2022] Launched impl_1...
+Run output will be captured here: /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/runme.log
+[Tue Mar  8 10:44:06 2022] Waiting for impl_1 to finish...
+
+*** Running vivado
+    with args -log top_pb_example.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_pb_example.tcl -notrace
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source top_pb_example.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository '/home/hazen/work/picoblaze-ebus/IP_repository'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2020.2/data/ip'.
+Command: link_design -top top_pb_example -part xc7a50tcsg325-2
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7a50tcsg325-2
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2352.992 ; gain = 0.000 ; free physical = 2014 ; free virtual = 56873
+INFO: [Netlist 29-17] Analyzing 541 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2020.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+CRITICAL WARNING: [Common 17-69] Command failed: 'W5' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:7]
+CRITICAL WARNING: [Common 17-69] Command failed: 'E19' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:49]
+CRITICAL WARNING: [Common 17-69] Command failed: 'U19' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:51]
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+CRITICAL WARNING: [Common 17-69] Command failed: 'B18' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:273]
+CRITICAL WARNING: [Common 17-69] Command failed: 'A18' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:275]
+Finished Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2408.867 ; gain = 0.000 ; free physical = 1920 ; free virtual = 56776
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 369 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 69 instances
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 288 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 8 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
+
+9 Infos, 3 Warnings, 7 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/pre-implementation.tcl
+INFO: [Hog:Msg-0] Disabling multithreading to assure deterministic bitfile
+INFO: [Hog:Msg-0] All done
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00.46 ; elapsed = 00:00:00.49 . Memory (MB): peak = 2416.871 ; gain = 8.004 ; free physical = 1926 ; free virtual = 56781
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 191e6bd3d
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2591.684 ; gain = 174.812 ; free physical = 1583 ; free virtual = 56439
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: f1d4bead
+
+Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.14 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Retarget created 2 cells and removed 2 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 1a333d24e
+
+Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.16 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Constant propagation created 11 cells and removed 12 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.19 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Sweep created 4 cells and removed 3 cells
+
+Phase 4 BUFG optimization
+Phase 4 BUFG optimization | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 140aa8baf
+
+Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.27 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               2  |               2  |                                              0  |
+|  Constant propagation         |              11  |              12  |                                              0  |
+|  Sweep                        |               4  |               3  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+Ending Logic Optimization Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00.28 ; elapsed = 00:00:00.30 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+Ending Netlist Obfuscation Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Common 17-83] Releasing license: Implementation
+27 Infos, 3 Warnings, 7 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2762.621 ; gain = 353.754 ; free physical = 1424 ; free virtual = 56274
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1408 ; free virtual = 56262
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_opt.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_opted.rpt -pb top_pb_example_drc_opted.pb -rpx top_pb_example_drc_opted.rpx
+Command: report_drc -file top_pb_example_drc_opted.rpt -pb top_pb_example_drc_opted.pb -rpx top_pb_example_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_opted.rpt.
+report_drc completed successfully
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 14d255ed0
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+WARNING: [Place 30-87] Partially locked IO Bus is found. Following components of the IO Bus led are not locked:  'led[2]'  'led[1]' 
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 197f67d6f
+
+Time (s): cpu = 00:00:00.29 ; elapsed = 00:00:00.32 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1384 ; free virtual = 56234
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+Phase 1 Placer Initialization | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 28529970f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1391 ; free virtual = 56241
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1c31d97c8
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1391 ; free virtual = 56241
+
+Phase 2.3 Global Placement Core
+
+Phase 2.3.1 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 21 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-775] End 1 Pass. Optimized 10 nets or cells. Created 0 new cell, deleted 10 existing cells and moved 0 existing cell
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |             10  |                    10  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |             10  |                    10  |           0  |           3  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.3.1 Physical Synthesis In Placer | Checksum: 1ab324908
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+Phase 2.3 Global Placement Core | Checksum: 19cfee142
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+Phase 2 Global Placement | Checksum: 19cfee142
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 188697a10
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 129d17304
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: 137fb3944
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 1da66d470
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 1f62514a1
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 14f59e4c6
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 103d9f6b8
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+Phase 3 Detail Placement | Checksum: 103d9f6b8
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: b9eb2f03
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 1 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=3.704 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: b9d1c2f9
+
+Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.16 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
+Ending Physical Synthesis Task | Checksum: fadd8013
+
+Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.17 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.1.1.1 BUFG Insertion | Checksum: b9eb2f03
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+INFO: [Place 30-746] Post Placement Timing Summary WNS=3.704. For the most accurate timing information please run report_timing.
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.1 Post Commit Optimization | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                2x2|
+|___________|___________________|___________________|
+|      South|                1x1|                1x1|
+|___________|___________________|___________________|
+|       East|                1x1|                1x1|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.3 Placer Reporting | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: e6ce3de5
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Ending Placer Task | Checksum: e0860741
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+INFO: [Common 17-83] Releasing license: Implementation
+59 Infos, 4 Warnings, 7 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1385 ; free virtual = 56236
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.10 ; elapsed = 00:00:00.10 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56239
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_placed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_io -file top_pb_example_io_placed.rpt
+report_io: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1377 ; free virtual = 56229
+INFO: [runtcl-4] Executing : report_utilization -file top_pb_example_utilization_placed.rpt -pb top_pb_example_utilization_placed.pb
+INFO: [runtcl-4] Executing : report_control_sets -verbose -file top_pb_example_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56235
+INFO: [runtcl-4] Executing : report_utilization -file top_pb_example_utilization_placed_1.rpt -pb top_pb_example_utilization_placed_1.pb
+Command: phys_opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. Skipping all physical synthesis optimizations.
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+70 Infos, 4 Warnings, 7 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.11 . Memory (MB): peak = 2816.316 ; gain = 0.000 ; free physical = 1349 ; free virtual = 56208
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_physopt.dcp' has been generated.
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+Running DRC as a precondition to command route_design
+WARNING: [DRC PLIO-3] Placement Constraints Check for IO constraints: Partially locked IO Bus is found. Following components of the IO Bus led[2:0] are not locked:  led[2] led[1]
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Warnings
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+Checksum: PlaceDB: 5093ed26 ConstDB: 0 ShapeSum: 8ff21a1b RouteDB: 0
+
+Phase 1 Build RT Design
+Phase 1 Build RT Design | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2907.926 ; gain = 84.672 ; free physical = 1271 ; free virtual = 56113
+Post Restoration Checksum: NetGraph: 63b5d15e NumContArr: ca192b29 Constraints: 0 Timing: 0
+
+Phase 2 Router Initialization
+
+Phase 2.1 Create Timer
+Phase 2.1 Create Timer | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2907.926 ; gain = 84.672 ; free physical = 1273 ; free virtual = 56115
+
+Phase 2.2 Fix Topology Constraints
+Phase 2.2 Fix Topology Constraints | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2911.926 ; gain = 88.672 ; free physical = 1269 ; free virtual = 56111
+
+Phase 2.3 Pre Route Cleanup
+Phase 2.3 Pre Route Cleanup | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2911.926 ; gain = 88.672 ; free physical = 1269 ; free virtual = 56111
+ Number of Nodes with overlaps = 0
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1ea324215
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2924.930 ; gain = 101.676 ; free physical = 1262 ; free virtual = 56103
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.765  | TNS=0.000  | WHS=-0.245 | THS=-438.162|
+
+Phase 2 Router Initialization | Checksum: 293fd15cb
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2924.930 ; gain = 101.676 ; free physical = 1261 ; free virtual = 56101
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 1709
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 1709
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 293fd15cb
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2927.930 ; gain = 104.676 ; free physical = 1260 ; free virtual = 56100
+Phase 3 Initial Routing | Checksum: 1fd0d0d76
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1260 ; free virtual = 56101
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 150
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.894  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+Phase 4 Rip-up And Reroute | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+Phase 5 Delay and Skew Optimization | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1263 ; free virtual = 56104
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.961  | TNS=0.000  | WHS=0.088  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+Phase 6 Post Hold Fix | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 1.42813 %
+  Global Horizontal Routing Utilization  = 1.28592 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 134acc7a0
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1263 ; free virtual = 56104
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 134acc7a0
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 1073adefa
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=1.961  | TNS=0.000  | WHS=0.088  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 1073adefa
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2942.836 ; gain = 119.582 ; free physical = 1269 ; free virtual = 56111
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+83 Infos, 5 Warnings, 7 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2942.836 ; gain = 126.520 ; free physical = 1269 ; free virtual = 56111
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/post-implementation.tcl
+INFO: [Hog:Msg-0] Evaluating Git sha for pb_example...
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+INFO: [Hog:GetVerFromSHA-0] No tag contains CCE0DAB, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:Msg-0] Git describe set to: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Evaluating last git SHA in which pb_example was modified...
+CRITICAL WARNING: [Hog:Msg-0] Git working directory /home/hazen/work/picoblaze-ebus not clean, git commit hash be set to 0.
+INFO: [Hog:Msg-0] The git SHA value 0000000 will be set as bitstream USERID.
+INFO: [Hog:Msg-0] Evaluating Git sha for pb_example...
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+INFO: [Hog:GetVerFromSHA-0] No tag contains CCE0DAB, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:Msg-0] Git describe set to: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_example-v0.0.1-9-g8be7f50-dirty...
+INFO: [Hog:Msg-0] Evaluating differences with last commit...
+WARNING: [Hog:Msg-0] Found non committed changes:
+ picoblaze/con/Basys-3-Master.xdc |  9 ++++-----
+ picoblaze/src/top_pb_example.vhd | 13 ++++++-------
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+INFO: [Hog:Msg-0] All done.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2942.836 ; gain = 0.000 ; free physical = 1260 ; free virtual = 56110
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_routed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_routed.rpt -pb top_pb_example_drc_routed.pb -rpx top_pb_example_drc_routed.rpx
+Command: report_drc -file top_pb_example_drc_routed.rpt -pb top_pb_example_drc_routed.pb -rpx top_pb_example_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_routed.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_methodology -file top_pb_example_methodology_drc_routed.rpt -pb top_pb_example_methodology_drc_routed.pb -rpx top_pb_example_methodology_drc_routed.rpx
+Command: report_methodology -file top_pb_example_methodology_drc_routed.rpt -pb top_pb_example_methodology_drc_routed.pb -rpx top_pb_example_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_methodology_drc_routed.rpt.
+report_methodology completed successfully
+INFO: [runtcl-4] Executing : report_power -file top_pb_example_power_routed.rpt -pb top_pb_example_power_summary_routed.pb -rpx top_pb_example_power_routed.rpx
+Command: report_power -file top_pb_example_power_routed.rpt -pb top_pb_example_power_summary_routed.pb -rpx top_pb_example_power_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+119 Infos, 6 Warnings, 10 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_route_status -file top_pb_example_route_status.rpt -pb top_pb_example_route_status.pb
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file top_pb_example_timing_summary_routed.rpt -pb top_pb_example_timing_summary_routed.pb -rpx top_pb_example_timing_summary_routed.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_incremental_reuse -file top_pb_example_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
+INFO: [runtcl-4] Executing : report_clock_utilization -file top_pb_example_clock_utilization_routed.rpt
+INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file top_pb_example_bus_skew_routed.rpt -pb top_pb_example_bus_skew_routed.pb -rpx top_pb_example_bus_skew_routed.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_routed_1.rpt -pb top_pb_example_drc_routed_1.pb -rpx top_pb_example_drc_routed_1.rpx
+Command: report_drc -file top_pb_example_drc_routed_1.rpt -pb top_pb_example_drc_routed_1.pb -rpx top_pb_example_drc_routed_1.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_routed_1.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_power -file top_pb_example_power_routed_1.rpt -pb top_pb_example_power_summary_routed_1.pb -rpx top_pb_example_power_routed_1.rpx
+Command: report_power -file top_pb_example_power_routed_1.rpt -pb top_pb_example_power_summary_routed_1.pb -rpx top_pb_example_power_routed_1.rpx
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+6 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file top_pb_example_timing_summary_routed_1.rpt -pb top_pb_example_timing_summary_routed_1.pb -rpx top_pb_example_timing_summary_routed_1.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_utilization -file route_report_utilization_0.rpt -pb route_report_utilization_0.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 10:45:06 2022...
+[Tue Mar  8 10:45:12 2022] impl_1 finished
+wait_on_run: Time (s): cpu = 00:00:00.87 ; elapsed = 00:01:06 . Memory (MB): peak = 2351.020 ; gain = 0.000 ; free physical = 2712 ; free virtual = 57562
+INFO: [Hog:Msg-0] Run: impl_1 progress: 100%, status : route_design Complete!
+INFO: [Hog:Msg-0] Time requirements are met
+*** Timing summary ***
+WNS: 1.960189
+TNS: 0.000000
+WHS: 0.087526
+THS: 0.000000
+INFO: [Hog:Msg-0] Starting write bitstream flow...
+[Tue Mar  8 10:45:12 2022] Launched impl_1...
+Run output will be captured here: /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/runme.log
+[Tue Mar  8 10:45:12 2022] Waiting for impl_1 to finish...
+
+*** Running vivado
+    with args -log top_pb_example.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_pb_example.tcl -notrace
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source top_pb_example.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository '/home/hazen/work/picoblaze-ebus/IP_repository'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2020.2/data/ip'.
+Command: link_design -top top_pb_example -part xc7a50tcsg325-2
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7a50tcsg325-2
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2352.992 ; gain = 0.000 ; free physical = 2014 ; free virtual = 56873
+INFO: [Netlist 29-17] Analyzing 541 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2020.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+CRITICAL WARNING: [Common 17-69] Command failed: 'W5' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:7]
+CRITICAL WARNING: [Common 17-69] Command failed: 'E19' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:49]
+CRITICAL WARNING: [Common 17-69] Command failed: 'U19' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:51]
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:119]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:120]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+CRITICAL WARNING: [Common 17-69] Command failed: 'B18' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:273]
+CRITICAL WARNING: [Common 17-69] Command failed: 'A18' is not a valid site or package pin name. [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc:275]
+Finished Parsing XDC File [/home/hazen/work/picoblaze-ebus/picoblaze/con/Basys-3-Master.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2408.867 ; gain = 0.000 ; free physical = 1920 ; free virtual = 56776
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 369 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 69 instances
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 288 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 8 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
+
+9 Infos, 3 Warnings, 7 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/pre-implementation.tcl
+INFO: [Hog:Msg-0] Disabling multithreading to assure deterministic bitfile
+INFO: [Hog:Msg-0] All done
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00.46 ; elapsed = 00:00:00.49 . Memory (MB): peak = 2416.871 ; gain = 8.004 ; free physical = 1926 ; free virtual = 56781
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 191e6bd3d
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2591.684 ; gain = 174.812 ; free physical = 1583 ; free virtual = 56439
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: f1d4bead
+
+Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.14 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Retarget created 2 cells and removed 2 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 1a333d24e
+
+Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.16 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Constant propagation created 11 cells and removed 12 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.19 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Sweep created 4 cells and removed 3 cells
+
+Phase 4 BUFG optimization
+Phase 4 BUFG optimization | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 184dade20
+
+Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 140aa8baf
+
+Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.27 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               2  |               2  |                                              0  |
+|  Constant propagation         |              11  |              12  |                                              0  |
+|  Sweep                        |               4  |               3  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+Ending Logic Optimization Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00.28 ; elapsed = 00:00:00.30 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+Ending Netlist Obfuscation Task | Checksum: 19d9fdfec
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1424 ; free virtual = 56274
+INFO: [Common 17-83] Releasing license: Implementation
+27 Infos, 3 Warnings, 7 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2762.621 ; gain = 353.754 ; free physical = 1424 ; free virtual = 56274
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2762.621 ; gain = 0.000 ; free physical = 1408 ; free virtual = 56262
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_opt.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_opted.rpt -pb top_pb_example_drc_opted.pb -rpx top_pb_example_drc_opted.rpx
+Command: report_drc -file top_pb_example_drc_opted.rpt -pb top_pb_example_drc_opted.pb -rpx top_pb_example_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_opted.rpt.
+report_drc completed successfully
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 14d255ed0
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1351 ; free virtual = 56202
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+WARNING: [Place 30-87] Partially locked IO Bus is found. Following components of the IO Bus led are not locked:  'led[2]'  'led[1]' 
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 197f67d6f
+
+Time (s): cpu = 00:00:00.29 ; elapsed = 00:00:00.32 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1384 ; free virtual = 56234
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+Phase 1 Placer Initialization | Checksum: 1e52f59fc
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1393 ; free virtual = 56243
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 28529970f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1391 ; free virtual = 56241
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1c31d97c8
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1391 ; free virtual = 56241
+
+Phase 2.3 Global Placement Core
+
+Phase 2.3.1 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 21 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-775] End 1 Pass. Optimized 10 nets or cells. Created 0 new cell, deleted 10 existing cells and moved 0 existing cell
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |             10  |                    10  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |             10  |                    10  |           0  |           3  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.3.1 Physical Synthesis In Placer | Checksum: 1ab324908
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+Phase 2.3 Global Placement Core | Checksum: 19cfee142
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+Phase 2 Global Placement | Checksum: 19cfee142
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 188697a10
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56234
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 129d17304
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: 137fb3944
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 1da66d470
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56233
+
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 1f62514a1
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 14f59e4c6
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 103d9f6b8
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+Phase 3 Detail Placement | Checksum: 103d9f6b8
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: b9eb2f03
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 1 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=3.704 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: b9d1c2f9
+
+Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.16 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56232
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
+Ending Physical Synthesis Task | Checksum: fadd8013
+
+Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.17 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.1.1.1 BUFG Insertion | Checksum: b9eb2f03
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+INFO: [Place 30-746] Post Placement Timing Summary WNS=3.704. For the most accurate timing information please run report_timing.
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.1 Post Commit Optimization | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                2x2|
+|___________|___________________|___________________|
+|      South|                1x1|                1x1|
+|___________|___________________|___________________|
+|       East|                1x1|                1x1|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4.3 Placer Reporting | Checksum: b0ab359b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: e6ce3de5
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+Ending Placer Task | Checksum: e0860741
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1381 ; free virtual = 56232
+INFO: [Common 17-83] Releasing license: Implementation
+59 Infos, 4 Warnings, 7 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1385 ; free virtual = 56236
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.10 ; elapsed = 00:00:00.10 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1382 ; free virtual = 56239
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_placed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_io -file top_pb_example_io_placed.rpt
+report_io: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1377 ; free virtual = 56229
+INFO: [runtcl-4] Executing : report_utilization -file top_pb_example_utilization_placed.rpt -pb top_pb_example_utilization_placed.pb
+INFO: [runtcl-4] Executing : report_control_sets -verbose -file top_pb_example_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2804.441 ; gain = 0.000 ; free physical = 1383 ; free virtual = 56235
+INFO: [runtcl-4] Executing : report_utilization -file top_pb_example_utilization_placed_1.rpt -pb top_pb_example_utilization_placed_1.pb
+Command: phys_opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. Skipping all physical synthesis optimizations.
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+70 Infos, 4 Warnings, 7 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.11 . Memory (MB): peak = 2816.316 ; gain = 0.000 ; free physical = 1349 ; free virtual = 56208
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_physopt.dcp' has been generated.
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+Running DRC as a precondition to command route_design
+WARNING: [DRC PLIO-3] Placement Constraints Check for IO constraints: Partially locked IO Bus is found. Following components of the IO Bus led[2:0] are not locked:  led[2] led[1]
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Warnings
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+Checksum: PlaceDB: 5093ed26 ConstDB: 0 ShapeSum: 8ff21a1b RouteDB: 0
+
+Phase 1 Build RT Design
+Phase 1 Build RT Design | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2907.926 ; gain = 84.672 ; free physical = 1271 ; free virtual = 56113
+Post Restoration Checksum: NetGraph: 63b5d15e NumContArr: ca192b29 Constraints: 0 Timing: 0
+
+Phase 2 Router Initialization
+
+Phase 2.1 Create Timer
+Phase 2.1 Create Timer | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2907.926 ; gain = 84.672 ; free physical = 1273 ; free virtual = 56115
+
+Phase 2.2 Fix Topology Constraints
+Phase 2.2 Fix Topology Constraints | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2911.926 ; gain = 88.672 ; free physical = 1269 ; free virtual = 56111
+
+Phase 2.3 Pre Route Cleanup
+Phase 2.3 Pre Route Cleanup | Checksum: 12dcefc87
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2911.926 ; gain = 88.672 ; free physical = 1269 ; free virtual = 56111
+ Number of Nodes with overlaps = 0
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1ea324215
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2924.930 ; gain = 101.676 ; free physical = 1262 ; free virtual = 56103
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.765  | TNS=0.000  | WHS=-0.245 | THS=-438.162|
+
+Phase 2 Router Initialization | Checksum: 293fd15cb
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2924.930 ; gain = 101.676 ; free physical = 1261 ; free virtual = 56101
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 1709
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 1709
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 293fd15cb
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2927.930 ; gain = 104.676 ; free physical = 1260 ; free virtual = 56100
+Phase 3 Initial Routing | Checksum: 1fd0d0d76
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1260 ; free virtual = 56101
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 150
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.894  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+Phase 4 Rip-up And Reroute | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+Phase 5 Delay and Skew Optimization | Checksum: 183b55604
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56103
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1263 ; free virtual = 56104
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.961  | TNS=0.000  | WHS=0.088  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+Phase 6 Post Hold Fix | Checksum: 1090838e5
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 1.42813 %
+  Global Horizontal Routing Utilization  = 1.28592 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 134acc7a0
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1263 ; free virtual = 56104
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 134acc7a0
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 1073adefa
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=1.961  | TNS=0.000  | WHS=0.088  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 1073adefa
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2930.930 ; gain = 107.676 ; free physical = 1262 ; free virtual = 56104
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2942.836 ; gain = 119.582 ; free physical = 1269 ; free virtual = 56111
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+83 Infos, 5 Warnings, 7 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2942.836 ; gain = 126.520 ; free physical = 1269 ; free virtual = 56111
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/post-implementation.tcl
+INFO: [Hog:Msg-0] Evaluating Git sha for pb_example...
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+INFO: [Hog:GetVerFromSHA-0] No tag contains CCE0DAB, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:Msg-0] Git describe set to: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Evaluating last git SHA in which pb_example was modified...
+CRITICAL WARNING: [Hog:Msg-0] Git working directory /home/hazen/work/picoblaze-ebus not clean, git commit hash be set to 0.
+INFO: [Hog:Msg-0] The git SHA value 0000000 will be set as bitstream USERID.
+INFO: [Hog:Msg-0] Evaluating Git sha for pb_example...
+INFO: [Hog:GetVerFromSHA-0] No tag contains cce0dab, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
+CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_example not clean, commit hash, and version will be set to 0.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BCC1A8, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8BE7F50, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 8325FD3, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
+INFO: [Hog:GetVerFromSHA-0] No tag contains CCE0DAB, will use most recent tag v0.0.1. As this is an official tag, patch will be incremented to 2.
+INFO: [Hog:Msg-0] Git describe set to: v0.0.1-9-g8be7f50-dirty
+INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_example-v0.0.1-9-g8be7f50-dirty...
+INFO: [Hog:Msg-0] Evaluating differences with last commit...
+WARNING: [Hog:Msg-0] Found non committed changes:
+ picoblaze/con/Basys-3-Master.xdc |  9 ++++-----
+ picoblaze/src/top_pb_example.vhd | 13 ++++++-------
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+INFO: [Hog:Msg-0] All done.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2942.836 ; gain = 0.000 ; free physical = 1260 ; free virtual = 56110
+INFO: [Common 17-1381] The checkpoint '/home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_routed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_routed.rpt -pb top_pb_example_drc_routed.pb -rpx top_pb_example_drc_routed.rpx
+Command: report_drc -file top_pb_example_drc_routed.rpt -pb top_pb_example_drc_routed.pb -rpx top_pb_example_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_routed.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_methodology -file top_pb_example_methodology_drc_routed.rpt -pb top_pb_example_methodology_drc_routed.pb -rpx top_pb_example_methodology_drc_routed.rpx
+Command: report_methodology -file top_pb_example_methodology_drc_routed.rpt -pb top_pb_example_methodology_drc_routed.pb -rpx top_pb_example_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_methodology_drc_routed.rpt.
+report_methodology completed successfully
+INFO: [runtcl-4] Executing : report_power -file top_pb_example_power_routed.rpt -pb top_pb_example_power_summary_routed.pb -rpx top_pb_example_power_routed.rpx
+Command: report_power -file top_pb_example_power_routed.rpt -pb top_pb_example_power_summary_routed.pb -rpx top_pb_example_power_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+119 Infos, 6 Warnings, 10 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_route_status -file top_pb_example_route_status.rpt -pb top_pb_example_route_status.pb
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file top_pb_example_timing_summary_routed.rpt -pb top_pb_example_timing_summary_routed.pb -rpx top_pb_example_timing_summary_routed.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_incremental_reuse -file top_pb_example_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
+INFO: [runtcl-4] Executing : report_clock_utilization -file top_pb_example_clock_utilization_routed.rpt
+INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file top_pb_example_bus_skew_routed.rpt -pb top_pb_example_bus_skew_routed.pb -rpx top_pb_example_bus_skew_routed.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_drc -file top_pb_example_drc_routed_1.rpt -pb top_pb_example_drc_routed_1.pb -rpx top_pb_example_drc_routed_1.rpx
+Command: report_drc -file top_pb_example_drc_routed_1.rpt -pb top_pb_example_drc_routed_1.pb -rpx top_pb_example_drc_routed_1.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/hazen/work/picoblaze-ebus/Projects/pb_example/pb_example.runs/impl_1/top_pb_example_drc_routed_1.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_power -file top_pb_example_power_routed_1.rpt -pb top_pb_example_power_summary_routed_1.pb -rpx top_pb_example_power_routed_1.rpx
+Command: report_power -file top_pb_example_power_routed_1.rpt -pb top_pb_example_power_summary_routed_1.pb -rpx top_pb_example_power_routed_1.rpx
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+6 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file top_pb_example_timing_summary_routed_1.rpt -pb top_pb_example_timing_summary_routed_1.pb -rpx top_pb_example_timing_summary_routed_1.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [runtcl-4] Executing : report_utilization -file route_report_utilization_0.rpt -pb route_report_utilization_0.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 10:45:06 2022...
+
+*** Running vivado
+    with args -log top_pb_example.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_pb_example.tcl -notrace
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source top_pb_example.tcl -notrace
+Command: open_checkpoint top_pb_example_routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2356.781 ; gain = 0.000 ; free physical = 2169 ; free virtual = 57117
+INFO: [Device 21-403] Loading part xc7a50tcsg325-2
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2356.957 ; gain = 0.000 ; free physical = 1930 ; free virtual = 56851
+INFO: [Netlist 29-17] Analyzing 531 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2020.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
+  general.maxThreads
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.22 . Memory (MB): peak = 2580.586 ; gain = 5.938 ; free physical = 1378 ; free virtual = 56321
+Restored from archive | CPU: 0.210000 secs | Memory: 5.044365 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.22 . Memory (MB): peak = 2580.586 ; gain = 5.938 ; free physical = 1378 ; free virtual = 56321
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2580.586 ; gain = 0.000 ; free physical = 1376 ; free virtual = 56320
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 359 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 59 instances
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 288 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 8 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2020.2 (64-bit) build 3064766
+open_checkpoint: Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2580.586 ; gain = 227.773 ; free physical = 1374 ; free virtual = 56317
+source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/pre-bitstream.tcl
+INFO: [Hog:Msg-0] Disabling multithreading to assure deterministic bitfile
+INFO: [Hog:Msg-0] All done.
+Command: write_bitstream -force top_pb_example.bit -bin_file
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a50t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a50t'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2020.2/data/ip'.
+ERROR: [DRC UCIO-1] Unconstrained Logical Port: 5 out of 6 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: led[2], led[1], clk100, uart_rx, and uart_tx.
+INFO: [Vivado 12-3199] DRC finished with 1 Errors
+INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado 12-1345] Error(s) found during DRC. Bitgen not run.
+INFO: [Common 17-83] Releasing license: Implementation
+21 Infos, 0 Warnings, 0 Critical Warnings and 2 Errors encountered.
+write_bitstream failed
+write_bitstream: Time (s): cpu = 00:00:02 ; elapsed = 00:00:06 . Memory (MB): peak = 2687.344 ; gain = 106.758 ; free physical = 1377 ; free virtual = 56323
+ERROR: [Common 17-39] 'write_bitstream' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 10:45:38 2022...
+[Tue Mar  8 10:45:38 2022] impl_1 finished
+WARNING: [Vivado 12-8222] Failed run(s) : 'impl_1'
+wait_on_run: Time (s): cpu = 00:00:00.88 ; elapsed = 00:00:26 . Memory (MB): peak = 2351.020 ; gain = 0.000 ; free physical = 1612 ; free virtual = 56557
+INFO: [Hog:Msg-0] Run: impl_1 progress: 83.333333333333343%, status : write_bitstream ERROR
+ERROR: [Hog:Msg-0] Write bitstream error, status is: write_bitstream ERROR
+INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 10:45:38 2022...

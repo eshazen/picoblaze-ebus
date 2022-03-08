@@ -116,8 +116,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports {led[2]}]
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnL]
 #set_property PACKAGE_PIN T17 [get_ports btnR]
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnR]
-set_property PACKAGE_PIN U17 [get_ports btnD]
-set_property IOSTANDARD LVCMOS33 [get_ports btnD]
+#set_property PACKAGE_PIN U17 [get_ports btnD]
+#set_property IOSTANDARD LVCMOS33 [get_ports btnD]
 
 
 
@@ -270,11 +270,10 @@ set_property IOSTANDARD LVCMOS33 [get_ports btnD]
 #set_property PACKAGE_PIN A18 [get_ports RsTx]
 #set_property IOSTANDARD LVCMOS33 [get_ports RsTx]
 
-set_property PACKAGE_PIN B18 [get_ports UART_rx]
-set_property IOSTANDARD LVCMOS33 [get_ports UART_rx]
-set_property PACKAGE_PIN A18 [get_ports UART_tx]
-set_property IOSTANDARD LVCMOS33 [get_ports UART_tx]
-
+set_property PACKAGE_PIN B18 [get_ports uart_rx]
+set_property IOSTANDARD LVCMOS33 [get_ports uart_rx]
+set_property PACKAGE_PIN A18 [get_ports uart_tx]
+set_property IOSTANDARD LVCMOS33 [get_ports uart_tx]
 
 ##USB HID (PS/2)
 #set_property PACKAGE_PIN C17 [get_ports PS2Clk]
