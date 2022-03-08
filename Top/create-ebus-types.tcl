@@ -9,7 +9,7 @@ unset env(PYTHONHOME)
 unset env(PATH)
 set env(PATH) "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-set make_cmd "cd $PATH_REPO/picoblaze/sim && make"
+set make_cmd "cd $PATH_REPO/picoblaze/src && make"
 puts [exec bash -c $make_cmd]
 
 set env(PYTHONPATH) $PYTHONPATH
