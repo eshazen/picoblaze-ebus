@@ -1,3 +1,6 @@
 [submodule "Hog"]
 	path = Hog
 	url = ssh://git@gitlab.cern.ch:7999/hog/Hog.git
+[submodule "yml2hdl"]
+	path = yml2hdl
+	url = git@gitlab.com:tcpaiva/yml2hdl.git

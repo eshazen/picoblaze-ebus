@@ -40,7 +40,7 @@ Thumbs.db
 **.cf
 **.svh
 
-**/tdc_types.vhd
+**/ebus_types.txt
 
 **.tmp
 !/.gitignore
