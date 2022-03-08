@@ -4,3 +4,6 @@
 [submodule "yml2hdl"]
 	path = yml2hdl
 	url = git@gitlab.com:tcpaiva/yml2hdl.git
+[submodule "l0mdt-daq-felix"]
+	path = l0mdt-daq-felix
+	url = ssh://git@gitlab.cern.ch:7999/ehazen/l0mdt-daq-felix.git
