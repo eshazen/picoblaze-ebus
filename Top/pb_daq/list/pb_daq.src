@@ -4,6 +4,9 @@ l0mdt-daq-felix/daq-felix/src/dispatch.vhd
 l0mdt-daq-felix/daq-felix/src/fifo_512xN_xilinx.vhd
 l0mdt-daq-felix/daq-felix/src/format.vhd
 l0mdt-daq-felix/daq-felix/src/wm.vhd
+l0mdt-daq-felix/daq-felix/src/trig_gen.vhd
+l0mdt-daq-felix/daq-felix/src/ttc_eric.vhd
+IP/vu_fifo_512x72/vu_fifo_512x72.xci
 picoblaze/src/top_pb_daq.vhd
 picoblaze/src/rate_counter.vhd
 picoblaze/src/counter.vhd

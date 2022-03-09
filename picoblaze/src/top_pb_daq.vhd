@@ -28,7 +28,7 @@ use work.bus_multiplexer_pkg.all;
 --
 --
 
-entity top_pb_example is
+entity top_pb_daq is
 
   port (
     clk100  : in  std_logic;                      -- 100MHz oscillator
@@ -38,7 +38,7 @@ entity top_pb_example is
     led     : out std_logic_vector(15 downto 0);  -- LEDs
     JA      : out std_logic_vector(7 downto 0)
     );
-end entity top_pb_example;
+end entity top_pb_daq;
 
 
 --
@@ -46,7 +46,7 @@ end entity top_pb_example;
 --
 -- Start of test architecture
 --
-architecture arch of top_pb_example is
+architecture arch of top_pb_daq is
 --
 -------------------------------------------------------------------------------------------
 --
@@ -177,6 +177,10 @@ architecture arch of top_pb_example is
   signal ctrl_regs   : bus_array(N_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
   signal status_regs : bus_array(N_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
   signal action_regs : bus_array(N_ACTION-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
+
+  signal felix : std_logic_vector( 229 downto 0);
+  signal felix_dv : std_logic;
+  signal felix_full : std_logic;
 
 begin
 
