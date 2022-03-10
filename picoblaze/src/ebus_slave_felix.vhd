@@ -43,39 +43,57 @@ architecture arch of ebus_slave_felix is
   constant RAM_MUX_ADDR_BIT : integer := clog2( RAM_WIDTH/32);
   -- number of words per RAM location
   constant RAM_MUX_FACTOR : integer := integer( 2 ** RAM_MUX_ADDR_BIT);
+  -- width of RAM rounded up to 32 bits
+  constant RAM_MUX_WIDTH : integer := 32 * RAM_MUX_FACTOR;
 
-  -- address widths
-  constant WRITE_ADDR_WIDTH : integer := clog2( RAM_DEPTH);
-  constant READ_ADDR_WIDTH : integer := WRITE_ADDR_WIDTH + RAM_MUX_ADDR_BIT;
+  -- address width
+  constant ADDR_WIDTH : integer := clog2( RAM_DEPTH);
+
+  signal write_addr : unsigned( ADDR_WIDTH-1 downto 0);
+  signal read_addr : unsigned( ADDR_WIDTH-1 downto 0);
+
+  signal mux_in : std_logic_vector( RAM_MUX_WIDTH-1 downto 0);
+  signal mux_out : std_logic_vector(31 downto 0);
 
 begin  -- architecture arch
+
+  -- asynchronously multiplex output
+  fg: for i in 31 downto 0 generate
+    mux_out(i) <= mux_in( 32 * unsigned(ebus_out.addr(RAM_MUX_ADDR_BIT-1 downto 0)));
+  end generate fg;
+
+  mux_in( RAM_WIDTH-1 downto 0) <= ram_in;
 
   process (clk, reset) is
   begin  -- process
     if reset = '1' then                 -- asynchronous reset (active high)
 
+      write_addr <= (others => '0');
+      read_addr <= (others => '0');
+
     elsif rising_edge(clk) then         -- rising clock edge
+
+      -- write incoming data with wrap around
+      if ram_wr = '1' then
+        RAM( to_integer( write_addr)) <= ram_in;
+        if write_addr = RAM_DEPTH-1 then
+          write_addr <= (others => '0');
+        else
+          write_addr <= write_addr + 1;
+        end if;
+      end if;
+      
 
       -- decode address according to BASE_ADDR
       if std_match(std_logic_vector(ebus_out.addr), EBUS_BASE_ADDR) then
 
-        if ebus_out.wr = '1' then
---          if ebus_out.addr(REG_SEL_BIT) = '0' and ebus_out.addr(ACT_SEL_BIT) = '0' then
---            ctrl_regs(to_integer(unsigned(ebus_out.addr(clog2(NUM_CONTROL)-1 downto 0)))) <= ebus_out.data;
---          elsif ebus_out.addr(REG_SEL_BIT) = '0' and ebus_out.addr(ACT_SEL_BIT) = '1' then
---            action_regs(to_integer(unsigned(ebus_out.addr(clog2(NUM_CONTROL)-1 downto 0)))) <= ebus_out.data;
---          end if;
-        end if;
-
         if ebus_out.rd = '1' then
 
-          -- FIXME:  finish this
-
---          if ebus_out.addr(REG_SEL_BIT) = '0' and ebus_out.addr(ACT_SEL_BIT) = '0' then
---            ebus_in.data <= ctrl_regs(to_integer(unsigned(ebus_out.addr(clog2(NUM_CONTROL)-1 downto 0))));
---          elsif ebus_out.addr(REG_SEL_BIT) = '1' and ebus_out.addr(ACT_SEL_BIT) = '0' then
---            ebus_in.data <= status_regs(to_integer(unsigned(ebus_out.addr(clog2(NUM_STATUS)-1 downto 0))));
---          end if;
+          if ebus_out.addr(RAM_MUX_ADDR_BIT) = '0' then
+            dbus_in.data <= mux_out;
+          else
+            dbus_in.data <= write_addr;
+          end if;
         end if;
 
       end if;

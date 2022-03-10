@@ -26,3 +26,4 @@ picoblaze/src/ebus_slave_gpio.vhd
 picoblaze/src/ebus_slave_mux.vhd
 picoblaze/src/ebus_slave_gen.vhd
 picoblaze/src/ebus_slave_rate.vhd
+picoblaze/src/ebus_slave_felix.vhd

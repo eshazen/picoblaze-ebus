@@ -254,6 +254,17 @@ begin
       reset    => warm_reset,
       event    => event);
 
+  ebus_slave_felix_1: entity work.ebus_slave_felix
+    generic map (
+      EBUS_BASE_ADDR => "3-------")
+    port map (
+      ebus_out => ebus_out,
+      ebus_in  => ebus_in,
+      clk      => clk,
+      reset    => reset,
+      ram_in   => felix,
+      ram_wr   => felix_dv,
+      ram_full => felix_full);
 
   daq_unit_1 : entity work.daq_unit
     port map (
