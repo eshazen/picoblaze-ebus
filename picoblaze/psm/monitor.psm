@@ -803,7 +803,7 @@ help_msg:
 	LOAD&RETURN s5, help1$
 	LOAD&RETURN s5, NUL
 
-STRING welcome$, "Monitor V2.1"	
+STRING welcome$, "Monitor V2.2"	
 STRING error$, "Error"	
 
         INCLUDE "uart_interface_routines.psm"
