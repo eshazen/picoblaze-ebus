@@ -36,7 +36,7 @@ end entity ebus_slave_felix;
 
 architecture arch of ebus_slave_felix is
 
-  type ram_type is array ( 0 to RAM_DEPTH-1) of std_logic_vector(RWM_WIDTH-1 downto 0);
+  type ram_type is array ( 0 to RAM_DEPTH-1) of std_logic_vector(RAM_WIDTH-1 downto 0);
   signal RAM : ram_type;
 
   -- addresss offset for wide words
@@ -59,7 +59,7 @@ begin  -- architecture arch
 
   -- asynchronously multiplex output
   fg: for i in 31 downto 0 generate
-    mux_out(i) <= mux_in( 32 * unsigned(ebus_out.addr(RAM_MUX_ADDR_BIT-1 downto 0)));
+    mux_out(i) <= mux_in( 32 * to_integer(unsigned(ebus_out.addr(RAM_MUX_ADDR_BIT-1 downto 0))));
   end generate fg;
 
   mux_in( RAM_WIDTH-1 downto 0) <= ram_in;
