@@ -12,7 +12,7 @@
 	STRING help7$, "w (addr) (data)         - write to e-bus$"
 	STRING help8$, "r (addr) [(count)]      - read from e-bus$"
 	STRING help9$, "b                       - start UUE bootloader$"
-	STRING helpA$, "c (data) (len)          - write CITIROC serial$"
+	STRING helpA$, "d (addr) [(count)]      - dump FELIX data
         String helpB$, "v (div)                 - set baud rate diVisor$"
 	
 long_help_msg:

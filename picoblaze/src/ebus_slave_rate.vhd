@@ -8,28 +8,26 @@ use ieee.numeric_std.all;
 use work.ebus_types.all;
 use work.ebus_function_pkg.all;
 use work.util_pkg.all;
+use work.bus_multiplexer_pkg.all;
 
 entity ebus_slave_rate is
 
   generic (
-    EBUS_BASE_ADDR : string(1 to 8) := "2-------");
-
+    EBUS_BASE_ADDR : string(1 to 8) := "2-------";
+    NUM_RATE_METER : integer        := 1);
   port (
     ebus_out : in  ebus_out_t;
     ebus_in  : out ebus_in_t;
     clk      : in  std_logic;
     reset    : in  std_logic;
     clk_b    : in  std_logic;           -- event count clock domain
-    event    : in  std_logic            -- event to measure rate
+    event    : in  std_logic_vector(NUM_RATE_METER-1 downto 0)  -- event to measure rate
     );
 
 end entity ebus_slave_rate;
 
 
 architecture arch of ebus_slave_rate is
-
-  subtype LONG is std_logic_vector(31 downto 0);
-  subtype ULONG is unsigned(31 downto 0);
 
   component rate_counter is
     generic (
@@ -41,18 +39,19 @@ architecture arch of ebus_slave_rate is
       event_b       : in  std_logic;
       rate          : out std_logic_vector(31 downto 0));
   end component rate_counter;
-
-  signal rate : std_logic_vector(31 downto 0);
-
+  signal rate : bus_array(NUM_RATE_METER-1 downto 0)(31 downto 0);
+  
 begin  -- architecture arch
 
-  rate_counter_1: entity work.rate_counter
-    port map (
-      clk_A         => clk,
-      clk_B         => clk_b,
-      reset_A_async => reset,
-      event_b       => event,
-      rate          => rate);
+  fg : for i in 0 to NUM_RATE_METER-1 generate
+    rate_counter_2 : entity work.rate_counter
+      port map (
+        clk_A         => clk,
+        clk_B         => clk_b,
+        reset_A_async => reset,
+        event_b       => event(i),
+        rate          => rate(i));
+  end generate fg;
 
   process (clk, reset) is
   begin  -- process
@@ -64,7 +63,7 @@ begin  -- architecture arch
       if std_match(std_logic_vector(ebus_out.addr), EBUS_BASE_ADDR) then
 
         if ebus_out.rd = '1' then
-          ebus_in.data <= std_logic_vector(rate);
+          ebus_in.data <= rate(to_integer(unsigned(ebus_out.addr(clog2(NUM_RATE_METER)-1 downto 0))));
         end if;
 
       end if;

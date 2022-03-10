@@ -19,7 +19,7 @@ entity ebus_slave_felix is
   generic (
     EBUS_BASE_ADDR : string(1 to 8) := "2-------";
     RAM_WIDTH      : integer        := 230;
-    RAM_DEPTH      : integer        := 256);
+    RAM_DEPTH      : integer        := 1024);
 
   port (
     ebus_out : in  ebus_out_t;
@@ -76,9 +76,7 @@ begin  -- architecture arch
       -- write incoming data with wrap around
       if ram_wr = '1' then
         RAM( to_integer( write_addr)) <= ram_in;
-        if write_addr = RAM_DEPTH-1 then
-          write_addr <= (others => '0');
-        else
+        if write_addr /= RAM_DEPTH-1 then
           write_addr <= write_addr + 1;
         end if;
       end if;
@@ -90,10 +88,19 @@ begin  -- architecture arch
         if ebus_out.rd = '1' then
 
           if ebus_out.addr(RAM_MUX_ADDR_BIT) = '0' then
-            dbus_in.data <= mux_out;
+            ebus_in.data <= mux_out;
           else
-            dbus_in.data <= write_addr;
+            if ebus_out.addr(0) = '0' then
+              ebus_in.data(ADDR_WIDTH-1 downto 0) <= std_logic_vector(write_addr);
+              ebus_in.data(31 downto ADDR_WIDTH) <= (others => '0');
+            else
+              ebus_in.data(ADDR_WIDTH-1 downto 0) <= std_logic_vector(read_addr);
+              ebus_in.data(31 downto ADDR_WIDTH) <= (others => '0');
           end if;
+        end if;
+
+        if ebus_out.wr = '1' then
+          read_addr <= ebus_in.data(ADDR_WIDTH-1 downto 0);
         end if;
 
       end if;

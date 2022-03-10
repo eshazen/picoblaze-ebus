@@ -91,6 +91,9 @@
 	CONSTANT hexarg2_2, 3a
 	CONSTANT hexarg2_3, 3b
 	CONSTANT hexarg3, 3c
+	CONSTANT hexarg3_1, 3d
+	CONSTANT hexarg3_2, 3e
+	CONSTANT hexarg3_3, 3f
 	CONSTANT hexarg4, 40
 	CONSTANT hexarg5, 44
 
@@ -354,8 +357,8 @@ hx_end:
 	jump z, cmd_T
 	compare s5, "H"
 	jump z, cmd_H
-	compare s5, "C"
-	jump z, cmd_C
+	compare s5, "D"
+	jump z, cmd_D
 	compare s5, "V"
 	jump z, cmd_V
 
@@ -373,48 +376,6 @@ cmd_V:
 	fetch s7, hexarg1_1	; get rate msb
 	output s7, set_baud_rate_msb
 	output s6, set_baud_rate_lsb
-	jump main
-
-
-;;; write to CITIROC serial interface
-cmd_C:
-	;; on entry:  hexarg1 has data   (for 30000000)
-	;;            hexarg2 has length (for 30000001)
-	;; we'll use hexarg0 for the address
-	load sA, 30
-	load sB, 00
-	store sA, hexarg0	;first byte = 30
-	store sB, hexarg0_1	;second byte = 00
-	store sB, hexarg0_2	;third byte = 00
-	store sB, hexarg0_3	;last byte = 00
-	;; 
-	load s8, hexarg0
-	call set_ebus_addr	;set address
-
-	load s8, hexarg1	;write the serial data
-	call set_ebus_data
-
-	;; set address to 30000001
-	load sB, 01
-	store sB, hexarg0_3
-
-	load s8, hexarg0
-	call set_ebus_addr	;set address
-
-	load s8, hexarg2	;write length
-	call set_ebus_data
-
-	;; set address to 30000001
-	;; set address to 30000001
-	load sB, 10
-	store sB, hexarg0_3
-
-	load s8, hexarg0
-	call set_ebus_addr	;set address
-
-	load s8, hexarg2	;write arb data to trigger serial output
-	call set_ebus_data
-
 	jump main
 
 cmd_H:	call send_help
@@ -438,6 +399,80 @@ cmd_W:
 	call set_ebus_data	;this triggers a write
 
 	jump main
+
+cmd_D:
+;;; dump from FELIX RAM
+;;; same arguments as "R" but read 8x32 bits
+;;; set FELIX address by writing to ebus 3000_0000
+;;; read FELIX data from 3000_0000 to 3000_0007
+
+	;; set hexarg3 to 30000000 for FELIX addressing
+	load s1, 0
+	store s1, hexarg3
+	store s1, hexarg3_1
+	store s1, hexarg3_2
+	load s1, 30
+	store s1, hexarg3_3
+
+	load sA, 01		;default count
+	compare s0, 03		;was a count specified?
+	jump nz, nodai
+	fetch sA, hexarg2	;yes, get count from 2nd arg
+	
+;;; set FELIX address from hexarg1
+nodai:
+	load s8, hexarg3
+	call set_ebus_addr	;set eBus address to 3000_0000
+
+	load s8, hexarg1
+	call set_ebus_data	;set FELIX address from arg1
+
+	;; display FELIX address
+	load s8, hexarg1
+	load s7, 4
+	call send_hex_scratch_bytes
+
+;;; now read and display 8 words from 3000_0000
+	load sD, 8		;count 8 32-bit words to display
+daiw:	
+	call send_space
+
+	load s8, hexarg3	;FIXME need constant 0x30000000
+	call set_ebus_addr
+	
+	;; trigger read
+	input s0, trigger_ebus_read
+
+	;; read and display 4 bytes of data
+	load s8, ebus_data_0
+	load s7, 4
+	call send_hex_input_bytes
+	
+	;; increment the address
+	load s8, hexarg3
+	load s7, 4
+	call increment_scratch
+	
+	sub sD, 01		;decrement count
+	jump nz, daiw
+
+	call send_CR
+
+	sub sA, 01
+	jump z, main
+
+	;; reset hexarg3 to 3000_0000
+	load s1, 0
+	store s1, hexarg3
+	store s1, hexarg3_1
+
+	;; increment FELIX address in hexarg1
+	load s8, hexarg1
+	load s7, 4
+	call increment_scratch
+
+	jump nodai
+	
 
 ;;; read from e-bus 
 ;;;   0 args:  re-use last address

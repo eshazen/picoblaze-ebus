@@ -48,8 +48,8 @@ architecture arch of ebus_slave_gpio is
 
   -- use maximum of (#control, #status) registers to divide up the address space
   constant REG_SEL_BIT : integer := MAXIMUM(clog2(NUM_CONTROL), clog2(NUM_STATUS));
-  constant ACT_SEL_BIT : integer := clog2( NUM_CONTROL+NUM_STATUS);
---  constant ACT_SEL_BIT : integer := 8;  -- hardwired for now
+--  constant ACT_SEL_BIT : integer := clog2( NUM_CONTROL+NUM_STATUS);
+  constant ACT_SEL_BIT : integer := 8;  -- hardwired for now
   
 
 begin  -- architecture arch
