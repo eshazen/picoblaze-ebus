@@ -62,7 +62,7 @@ begin  -- architecture arch
     mux_out(i) <= mux_in(32 * to_integer(unsigned(ebus_out.addr(RAM_MUX_ADDR_BIT-1 downto 0))));
   end generate fg;
 
-  mux_in(RAM_WIDTH-1 downto 0) <= ram_in;
+  mux_in(RAM_WIDTH-1 downto 0) <= RAM( to_integer( read_addr));
 
   process (clk, reset) is
   begin  -- process
@@ -81,12 +81,10 @@ begin  -- architecture arch
         end if;
       end if;
 
-
       -- decode address according to BASE_ADDR
       if std_match(std_logic_vector(ebus_out.addr), EBUS_BASE_ADDR) then
 
         if ebus_out.rd = '1' then
-
           if ebus_out.addr(RAM_MUX_ADDR_BIT) = '0' then
             ebus_in.data <= mux_out;
           else
@@ -95,14 +93,20 @@ begin  -- architecture arch
               ebus_in.data(31 downto ADDR_WIDTH)  <= (others => '0');
             else
               ebus_in.data(ADDR_WIDTH-1 downto 0) <= std_logic_vector(read_addr);
-              ebus_in.data(31 downto ADDR_WIDTH)  <= (others => '0');
+              ebus_in.data(15 downto ADDR_WIDTH)  <= (others => '0');
+              ebus_in.data(31 downto 16) <= X"cafe";
             end if;
           end if;
-
         end if;
 
         if ebus_out.wr = '1' then
-          read_addr <= unsigned(ebus_in.data(ADDR_WIDTH-1 downto 0));
+
+          if ebus_out.addr(0) = '0' then
+            read_addr <= unsigned(ebus_out.data(ADDR_WIDTH-1 downto 0));
+          else
+            read_addr <= "10" & X"34";
+          end if;
+          
         end if;
 
       end if;
