@@ -176,8 +176,6 @@ architecture arch of top_pb_daq is
 
   signal event_mux : std_logic_vector(N_RATE-1 downto 0);
 
-
-
   signal ctrl_regs : bus_array(N_CONTROL-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
   signal status_regs : bus_array(N_STATUS-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
   signal action_regs : bus_array(N_ACTION-1 downto 0)(EBUS_DATA_WIDTH-1 downto 0);
@@ -267,7 +265,7 @@ begin
       ebus_out => ebus_out,
       ebus_in => ebus_in_group(3),
       clk => clk,
-      reset => reset,
+      reset => warm_reset,
       ram_in => felix,
       ram_wr => felix_dv,
       ram_full => felix_full);
@@ -275,7 +273,7 @@ begin
   daq_unit_1 : entity work.daq_unit
     port map (
       sys_clk => clk,
-      sys_rst => action_regs(0)(0),
+      sys_rst => warm_reset,
       trig_rate => ctrl_regs(0),
       hit_rate => ctrl_regs(1),
       ocr_req => action_regs(0)(1),
