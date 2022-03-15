@@ -35,9 +35,9 @@ INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2020.2/d
 INFO: [Hog:Msg-0] Skipping syntax check for project pb_daq
 INFO: [Hog:Msg-0] Resetting run before launching synthesis...
 INFO: [Vivado 12-4149] The synthesis checkpoint for IP '/home/hazen/work/picoblaze-ebus/IP/vu_fifo_512x72/vu_fifo_512x72.xci' is already up-to-date
-[Tue Mar 15 14:56:06 2022] Launched synth_1...
+[Tue Mar 15 14:58:44 2022] Launched synth_1...
 Run output will be captured here: /home/hazen/work/picoblaze-ebus/Projects/pb_daq/pb_daq.runs/synth_1/runme.log
-[Tue Mar 15 14:56:06 2022] Waiting for synth_1 to finish...
+[Tue Mar 15 14:58:44 2022] Waiting for synth_1 to finish...
 
 *** Running vivado
     with args -log top_pb_daq.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_pb_daq.tcl
@@ -57,13 +57,13 @@ source /home/hazen/work/picoblaze-ebus/Hog/Tcl/integrated/pre-synthesis.tcl
 INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
 CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_daq not clean, commit hash, and version will be set to 0.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
-INFO: [Hog:GetVerFromSHA-0] No tag contains 17E23D4, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 94405E6, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
 CRITICAL WARNING: [Hog:GetVer-0] Empty SHA found for /home/hazen/work/picoblaze-ebus/IP_repository. Commit to Git to resolve this warning.
 CRITICAL WARNING: [Hog:GetVerFromSHA-0] Empty SHA found
-INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_daq-v1.1.0-19-g17e23d4-dirty...
+INFO: [Hog:Msg-0] Creating /home/hazen/work/picoblaze-ebus/bin/pb_daq-v1.1.0-20-g94405e6-dirty...
 INFO: [Hog:Msg-0] Opening project pb_daq...
 WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory '/home/hazen/work/picoblaze-ebus/IP_repository'.
 Scanning sources...
@@ -79,26 +79,24 @@ INFO: [Hog:Msg-0] List files and hog.conf match project. All ok!
 INFO: [Hog:Msg-0] All done.
 INFO: [Hog:Msg-0] Evaluating non committed changes...
 WARNING: [Hog:Msg-0] Found non committed changes:...
- l0mdt-daq-felix              |    2 +-
- log.txt                      | 2635 +-----------------------------------------
- picoblaze/src/top_pb_daq.vhd |    3 -
- 3 files changed, 5 insertions(+), 2635 deletions(-)
-CRITICAL WARNING: [Hog:Msg-0] Repository is not clean, will use current SHA (17e23d4) and create a dirty bitfile...
+ log.txt | 116 +++-------------------------------------------------------------
+ 1 file changed, 4 insertions(+), 112 deletions(-)
+CRITICAL WARNING: [Hog:Msg-0] Repository is not clean, will use current SHA (94405e6) and create a dirty bitfile...
 CRITICAL WARNING: [Hog:FileCommitted-0] File /home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd is not in the git repository. Please add it with:
  git add /home/hazen/work/picoblaze-ebus/picoblaze/psm/my_ROM.vhd
-CRITICAL WARNING: [Hog:Msg-0] picoblaze/psm/my_ROM.vhd is not in the git repository. Will use current SHA (17e23d4) and version will be set to 0.
-INFO: [Hog:Msg-0] Git describe for 00000000 is: v1.1.0-19-g17e23d4-dirty
+CRITICAL WARNING: [Hog:Msg-0] picoblaze/psm/my_ROM.vhd is not in the git repository. Will use current SHA (94405e6) and version will be set to 0.
+INFO: [Hog:Msg-0] Git describe for 00000000 is: v1.1.0-20-g94405e6-dirty
 INFO: [Hog:Msg-0] Disabling multithreading to assure deterministic bitfile
 INFO: [Hog:Msg-0] Opening version file /home/hazen/work/picoblaze-ebus/Projects/pb_daq/pb_daq.runs/versions.txt...
  ------------------------- PRE SYNTHESIS -------------------------
- 15/03/2022 at 14:56:18
- Firmware date and time: 15032022, 00145249
- Global SHA: 17e23d4, VER: 0.0.0
+ 15/03/2022 at 14:58:56
+ Firmware date and time: 15032022, 00145829
+ Global SHA: 94405e6, VER: 0.0.0
  Constraints SHA: 9EE0B27, VER: 1.1.1
  Top SHA: 9EE0B27, VER: 1.1.1
  Hog SHA: 60BA50C, VER: 5.10.2
  --- Libraries ---
- pb_daq SHA: 17E23D4, VER: 1.1.1
+ pb_daq SHA: 94405E6, VER: 1.1.1
  --- User IP Repositories ---
  IP_repository SHA: , VER: 0.0.0
  -----------------------------------------------------------------
@@ -148,35 +146,34 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 1 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 690867
+INFO: [Synth 8-7075] Helper process launched with PID 691876
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2363.996 ; gain = 0.000 ; free physical = 313 ; free virtual = 56121
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2363.996 ; gain = 0.000 ; free physical = 346 ; free virtual = 56151
 ---------------------------------------------------------------------------------
-ERROR: [Synth 8-989] trig_valid is already declared in this region [/home/hazen/work/picoblaze-ebus/l0mdt-daq-felix/daq-felix/src/daq_unit.vhd:54]
 ERROR: [Synth 8-989] hit_dv is already declared in this region [/home/hazen/work/picoblaze-ebus/l0mdt-daq-felix/daq-felix/src/daq_unit.vhd:55]
 INFO: [Synth 8-2810] unit arch ignored due to previous errors [/home/hazen/work/picoblaze-ebus/l0mdt-daq-felix/daq-felix/src/daq_unit.vhd:50]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2363.996 ; gain = 0.000 ; free physical = 315 ; free virtual = 56120
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2363.996 ; gain = 0.000 ; free physical = 316 ; free virtual = 56122
 ---------------------------------------------------------------------------------
 RTL Elaboration failed
 INFO: [Common 17-83] Releasing license: Synthesis
-31 Infos, 4 Warnings, 6 Critical Warnings and 3 Errors encountered.
+31 Infos, 4 Warnings, 6 Critical Warnings and 2 Errors encountered.
 synth_design failed
 ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
-INFO: [Common 17-206] Exiting Vivado at Tue Mar 15 14:56:24 2022...
-[Tue Mar 15 14:56:28 2022] synth_1 finished
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 15 14:59:02 2022...
+[Tue Mar 15 14:59:05 2022] synth_1 finished
 WARNING: [Vivado 12-8222] Failed run(s) : 'synth_1'
-wait_on_run: Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2361.996 ; gain = 0.000 ; free physical = 1953 ; free virtual = 57758
+wait_on_run: Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2361.992 ; gain = 0.000 ; free physical = 1951 ; free virtual = 57757
 INFO: [Hog:Msg-0] Run: synth_1 progress: 0%, status : synth_design ERROR
 INFO: [Hog:GetRepoVersions-0] Hog submodule /home/hazen/work/picoblaze-ebus/Hog clean.
 CRITICAL WARNING: [Hog:GetRepoVersions-0] Git working directory /home/hazen/work/picoblaze-ebus/Top/pb_daq not clean, commit hash, and version will be set to 0.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
-INFO: [Hog:GetVerFromSHA-0] No tag contains 17E23D4, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
+INFO: [Hog:GetVerFromSHA-0] No tag contains 94405E6, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetVerFromSHA-0] No tag contains 9EE0B27, will use most recent tag v1.1.0. As this is an official tag, patch will be incremented to 1.
 INFO: [Hog:GetRepoVersions-0] This project does not use IPbus XMLs
 CRITICAL WARNING: [Hog:GetVer-0] Empty SHA found for /home/hazen/work/picoblaze-ebus/IP_repository. Commit to Git to resolve this warning.
 CRITICAL WARNING: [Hog:GetVerFromSHA-0] Empty SHA found
-INFO: [Hog:Msg-0] Git describe set to v1.1.0-19-g17e23d4-dirty
+INFO: [Hog:Msg-0] Git describe set to v1.1.0-20-g94405e6-dirty
 ERROR: [Hog:Msg-0] Synthesis error, status is: synth_design ERROR
-INFO: [Common 17-206] Exiting Vivado at Tue Mar 15 14:56:29 2022...
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 15 14:59:06 2022...
