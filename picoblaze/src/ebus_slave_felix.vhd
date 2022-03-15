@@ -64,6 +64,11 @@ architecture arch of ebus_slave_felix is
   signal dmux_in  : std_logic_vector(31 downto 0);
   signal dmux_out : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
 
+  -- input word for RAM
+  signal ram_write_word : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
+
+  signal tick : unsigned(31 downto 0);
+
 begin  -- architecture arch
 
   -- asynchronously multiplex/demultiplex RAM for 32-bit access
@@ -72,6 +77,9 @@ begin  -- architecture arch
   end generate fg;
 
   mux_in(RAM_WIDTH-1 downto 0) <= RAM(to_integer(read_addr));
+
+  -- for now replace low 32 bits with timestamp
+  ram_write_word <= ram_in( RAM_WIDTH-1 downto RAM_WIDTH-32) & std_logic_vector(tick);
 
   process (clk, reset) is
   begin  -- process
@@ -82,14 +90,17 @@ begin  -- architecture arch
       prog_write_addr <= (others => '0');
       write_enable    <= '0';
       set_write_addr  <= '0';
+      tick           <= (others => '0');
 
     elsif rising_edge(clk) then         -- rising clock edge
+
+      tick <= tick + 1;
 
       set_write_addr <= '0';            -- flag: programmed write address set
 
       -- write incoming data with wrap around
       if write_enable = '1' and ram_wr = '1' then
-        RAM(to_integer(write_addr)) <= ram_in;
+        RAM(to_integer(write_addr)) <= ram_write_word;
         if write_addr /= RAM_DEPTH-1 then
           write_addr <= write_addr + 1;
         end if;
