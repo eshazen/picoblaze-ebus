@@ -36,15 +36,17 @@ end entity ebus_slave_felix;
 
 architecture arch of ebus_slave_felix is
 
-  type ram_type is array (0 to RAM_DEPTH-1) of std_logic_vector(RAM_WIDTH-1 downto 0);
-  signal RAM : ram_type;
-
   -- addresss offset for wide words
   constant RAM_MUX_ADDR_BIT : integer := clog2(RAM_WIDTH/32);
   -- number of words per RAM location
   constant RAM_MUX_FACTOR   : integer := integer(2 ** RAM_MUX_ADDR_BIT);
   -- width of RAM rounded up to 32 bits
   constant RAM_MUX_WIDTH    : integer := 32 * RAM_MUX_FACTOR;
+
+  constant RAM_EXTRA : integer := RAM_MUX_WIDTH - RAM_WIDTH;
+
+  type ram_type is array (0 to RAM_DEPTH-1) of std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
+  signal RAM : ram_type;
 
   -- address width
   constant ADDR_WIDTH : integer := clog2(RAM_DEPTH);
@@ -65,9 +67,9 @@ architecture arch of ebus_slave_felix is
   signal dmux_out : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
 
   -- input word for RAM
-  signal ram_write_word : std_logic_vector(RAM_WIDTH-1 downto 0);
+  signal ram_write_word : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
 
-  signal tick : unsigned(31 downto 0);
+  signal tick : unsigned(RAM_EXTRA-1 downto 0);
 
 begin  -- architecture arch
 
@@ -76,10 +78,10 @@ begin  -- architecture arch
     mux_out(i) <= mux_in(i + (32 * to_integer(unsigned(ebus_out.addr(RAM_MUX_ADDR_BIT-1 downto 0)))));
   end generate fg;
 
-  mux_in(RAM_WIDTH-1 downto 0) <= RAM(to_integer(read_addr));
+  mux_in <= RAM(to_integer(read_addr));
 
   -- for now replace low 32 bits with timestamp
-  ram_write_word <= ram_in( RAM_WIDTH-1 downto 32) & std_logic_vector(tick);
+  ram_write_word <= ram_in & std_logic_vector(tick);
 
   process (clk, reset) is
   begin  -- process
