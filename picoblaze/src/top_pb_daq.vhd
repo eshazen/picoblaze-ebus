@@ -187,9 +187,6 @@ architecture arch of top_pb_daq is
   signal felix_dv   : std_logic;
   signal felix_full : std_logic;
 
-  signal trig_valid : std_logic;
-  signal hit_dv     : std_logic;
-
 begin
 
   reset <= '0';                         -- hopefully not needed
