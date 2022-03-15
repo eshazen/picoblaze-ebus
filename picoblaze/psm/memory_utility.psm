@@ -3,6 +3,7 @@
 ;;; all routines assume little-endian storage
 ;;; 
 ;;; increment_scratch   -- increment integer at s8 (length in s7)
+;;; decrement_scratch   -- decrement integer at s8 (length in s7)
 ;;; output_scratch      -- write port group
 ;;;                        s8 = scratch addr  s9 = port addr  s7 = count
 ;;; copy_scratch        -- copy scratch data from s8 to s9, s7 = count
@@ -22,6 +23,17 @@ bzero:	load s9, 00
 	add sA, 01
 	sub sC, 01
 	jump nz, bzero
+	return
+
+decrement_scratch:
+	fetch s0, (s8)
+	sub s0, 01
+	store s0, (s8)
+	return nc
+
+	add s8, 01		; point to next location
+	sub s7, 01		; decrement length
+	jump nz, decrement_scratch
 	return
 
 increment_scratch:

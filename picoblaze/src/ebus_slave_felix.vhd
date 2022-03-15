@@ -65,7 +65,7 @@ architecture arch of ebus_slave_felix is
   signal dmux_out : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
 
   -- input word for RAM
-  signal ram_write_word : std_logic_vector(RAM_MUX_WIDTH-1 downto 0);
+  signal ram_write_word : std_logic_vector(RAM_WIDTH-1 downto 0);
 
   signal tick : unsigned(31 downto 0);
 
@@ -79,7 +79,7 @@ begin  -- architecture arch
   mux_in(RAM_WIDTH-1 downto 0) <= RAM(to_integer(read_addr));
 
   -- for now replace low 32 bits with timestamp
-  ram_write_word <= ram_in( RAM_WIDTH-1 downto RAM_WIDTH-32) & std_logic_vector(tick);
+  ram_write_word <= ram_in( RAM_WIDTH-1 downto 32) & std_logic_vector(tick);
 
   process (clk, reset) is
   begin  -- process
@@ -103,6 +103,8 @@ begin  -- architecture arch
         RAM(to_integer(write_addr)) <= ram_write_word;
         if write_addr /= RAM_DEPTH-1 then
           write_addr <= write_addr + 1;
+        else
+          write_enable <= '0';
         end if;
       end if;
 
@@ -119,16 +121,17 @@ begin  -- architecture arch
             ebus_in.data <= mux_out;
           else
             -- read from address 8 is write address plus write enable
-            if ebus_out.addr(0) = '0' then
+            if ebus_out.addr(1 downto 0) = "00" then
               ebus_in.data(ADDR_WIDTH-1 downto 0) <= std_logic_vector(write_addr);
-              ebus_in.data(14 downto ADDR_WIDTH)  <= (others => '0');
-              ebus_in.data(15)                    <= write_enable;
+              ebus_in.data(15 downto ADDR_WIDTH)  <= (others => '0');
               ebus_in.data(31 downto 16)          <= X"beef";
-            else
+            elsif ebus_out.addr(1 downto 0) = "01" then
               -- read from address 9 is read address plus write enable in bit 15
               ebus_in.data(ADDR_WIDTH-1 downto 0) <= std_logic_vector(read_addr);
               ebus_in.data(15 downto ADDR_WIDTH)  <= (others => '0');
               ebus_in.data(31 downto 16)          <= X"cafe";
+            elsif ebus_out.addr(1 downto 0) = "10" then
+              ebus_in.data(0)                    <= write_enable;
             end if;
           end if;
         end if;

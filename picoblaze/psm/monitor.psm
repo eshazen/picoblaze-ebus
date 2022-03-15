@@ -17,8 +17,6 @@
 ;;;   w <addr> <data>           - write to e-bus
 ;;;   r <addr> [<count>]        - read from e-bus
 ;;;
-;;;   c <data> <count>          - send CITIROC serial data
-;;;                               (set CLKDIV first)
 ;;;   b                         - start UUE bootloader
 ;;;
 ;;;   t                         - test various things
@@ -95,6 +93,9 @@
 	CONSTANT hexarg3_2, 3e
 	CONSTANT hexarg3_3, 3f
 	CONSTANT hexarg4, 40
+	CONSTANT hexarg4_1, 41
+	CONSTANT hexarg4_2, 42
+	CONSTANT hexarg4_3, 43
 	CONSTANT hexarg5, 44
 
 ;;; free space for now 48-73
@@ -381,10 +382,10 @@ cmd_V:
 cmd_H:	call send_help
 	jump main
 
-;;; test the increment function
+;;; test the decrement function
 cmd_T:	fetch s8, hexarg1
 	fetch s7, hexarg2
-	call increment_scratch
+	call decrement_scratch
 	jump cmd_S
 
 ;;; write to e-bus
@@ -403,25 +404,28 @@ cmd_W:
 cmd_D:
 ;;; dump from FELIX RAM
 ;;; same arguments as "R" but read 8x32 bits
-;;; set FELIX address by writing to ebus 3000_0000
+;;; set FELIX address by writing to ebus 3000_0009
 ;;; read FELIX data from 3000_0000 to 3000_0007
 
-	;; set hexarg3 to 30000000 for FELIX addressing
+	;; set hexarg4 to 3000_0009 for FELIX addressing
+	load s1, 9
+	store s1, hexarg4
 	load s1, 0
-	store s1, hexarg3
-	store s1, hexarg3_1
-	store s1, hexarg3_2
+	store s1, hexarg4_1
+	store s1, hexarg4_2
 	load s1, 30
-	store s1, hexarg3_3
-
+	store s1, hexarg4_3
+	
 	load sA, 01		;default count
+	fetch s0, argc
 	compare s0, 03		;was a count specified?
 	jump nz, nodai
 	fetch sA, hexarg2	;yes, get count from 2nd arg
 	
-;;; set FELIX address from hexarg1
+;;; set FELIX address from hexarg1 at ebus hexarg4
+;;; 
 nodai:
-	load s8, hexarg3
+	load s8, hexarg4
 	call set_ebus_addr	;set eBus address to 3000_0000
 
 	load s8, hexarg1
@@ -432,12 +436,21 @@ nodai:
 	load s7, 4
 	call send_hex_scratch_bytes
 
-;;; now read and display 8 words from 3000_0000
+;;; now read and display 8 words from 3000_0007 downto _0000
 	load sD, 8		;count 8 32-bit words to display
+
+	;; set hexarg3 to 3000_0007 for data read
+	load s1, 7
+	store s1, hexarg3
+	load s1, 0
+	store s1, hexarg3_1
+	store s1, hexarg3_2
+	load s1, 30
+	store s1, hexarg3_3
 daiw:	
 	call send_space
 
-	load s8, hexarg3	;FIXME need constant 0x30000000
+	load s8, hexarg3	;set eBus address from hexarg3
 	call set_ebus_addr
 	
 	;; trigger read
@@ -448,10 +461,11 @@ daiw:
 	load s7, 4
 	call send_hex_input_bytes
 	
-	;; increment the address
+	;; decrement the address
 	load s8, hexarg3
 	load s7, 4
-	call increment_scratch
+	call decrement_scratch
+;	call increment_scratch	
 	
 	sub sD, 01		;decrement count
 	jump nz, daiw
