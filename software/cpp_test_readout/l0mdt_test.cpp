@@ -2,6 +2,12 @@
 // simple test of L0MDT DAQ with picoblaze-ebus interface
 //
 
+// ratio of rate meter sample period in system clocks
+// (clock is 100MHz; currently samples for 10M clocks)
+#define RATE_METER_PER 10e6
+#define SYS_CLK_RATE 100e6
+
+#define PIPE_CLK_MULTIPLE 8
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -75,13 +81,13 @@ int main(int argc, char** argv)
     rv = command_vector( sp, "o 10 0"); // issue soft reset
     sprintf( buff, "w 0 %08x", trig_r);
     rv = command_vector( sp, buff);
-    sprintf( buff, "w 0 %08x", hit_r);
+    sprintf( buff, "w 1 %08x", hit_r);
     rv = command_vector( sp, buff);
     rv = command_vector( sp, "w 3000000a 1");
 
     cout << "Waiting for rate measurement..." << endl;
 
-    sleep(2);
+    usleep( 250000);
 
     cout << "Reading rates..." << endl;
     
@@ -111,7 +117,16 @@ int main(int argc, char** argv)
 
     unsigned hit_m = strtoul( vt[1].c_str(), NULL, 16);
 
-    printf("Trigger rate (Hz) = %d  Hit rate (Hz) = %d\n", trig_m, hit_m);
+    // adjust the measured rates for rate meter sampling
+    trig_m *= SYS_CLK_RATE/RATE_METER_PER;
+    hit_m *= SYS_CLK_RATE/RATE_METER_PER;
+
+    // calculate the expected rates
+    double trig_c = trig_p * (SYS_CLK_RATE / PIPE_CLK_MULTIPLE);
+    double hit_c = hit_p * SYS_CLK_RATE;
+
+    printf("Expected trigger rate (Hz) = %8.0f  Hit rate (Hz) = %8.0f\n", trig_c, hit_c);
+    printf("Measured trigger rate (Hz) = %8d  Hit rate (Hz) = %8d\n", trig_m, hit_m);
 
   } catch (ArgException &e)  // catch any exceptions
     { cerr << "error: " << e.error() << " for arg " << e.argId() << endl; }

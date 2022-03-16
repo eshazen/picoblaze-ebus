@@ -2,6 +2,9 @@
 -- Generic counter
 -- Dan Gastler
 -- Process count pulses and provide a buffered value of count
+--
+-- Mods:
+-- 2022-03-16, hazen - only count on rising edge of event
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -37,6 +40,9 @@ architecture behavioral of counter is
   constant areset_count : unsigned(DATA_WIDTH-1 downto 0) := unsigned(A_RST_CNT(DATA_WIDTH-1 downto 0));
   signal local_count    : unsigned(DATA_WIDTH-1 downto 0) := min_count;
 
+  signal r_event : std_logic;
+  signal r_edge : std_logic;
+
 begin  -- architecture behavioral
 
   event_counter : process (clk, reset_async)
@@ -53,9 +59,17 @@ begin  -- architecture behavioral
         --output current counter;
 --        count <= local_count;
         count <= std_logic_vector(local_count);
+        r_event <= event;
+
+        if event = '1' and r_event = '0' then
+          r_edge <= '1';
+        else
+          r_edge <= '0';
+        end if;
 
         -- count
-        if enable = '1' and event = '1' then
+        if enable = '1' and r_edge = '1' then
+--        if enable = '1' and event = '1' then        
           if local_count = max_count then
             --roll over if requested
             if roll_over = '1' then
