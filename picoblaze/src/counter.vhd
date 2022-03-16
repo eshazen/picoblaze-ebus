@@ -16,11 +16,12 @@ use ieee.std_logic_misc.all;
 entity counter is
 
   generic (
-    roll_over   : std_logic        := '1';
-    end_value   : std_logic_vector(31 downto  0) := x"FFFFFFFF";
-    start_value : std_logic_vector(31 downto  0) := x"00000000";
-    A_RST_CNT   : std_logic_vector(31 downto  0) := x"00000000";
-    DATA_WIDTH  : integer          := 32);
+    edge_detect : std_logic                     := '0';
+    roll_over   : std_logic                     := '1';
+    end_value   : std_logic_vector(31 downto 0) := x"FFFFFFFF";
+    start_value : std_logic_vector(31 downto 0) := x"00000000";
+    A_RST_CNT   : std_logic_vector(31 downto 0) := x"00000000";
+    DATA_WIDTH  : integer                       := 32);
   port (
     clk         : in  std_logic;
     reset_async : in  std_logic;
@@ -34,14 +35,14 @@ entity counter is
 end entity counter;
 
 architecture behavioral of counter is
-  
+
   constant max_count    : unsigned(DATA_WIDTH-1 downto 0) := unsigned(end_value(DATA_WIDTH-1 downto 0));
   constant min_count    : unsigned(DATA_WIDTH-1 downto 0) := unsigned(start_value(DATA_WIDTH-1 downto 0));
   constant areset_count : unsigned(DATA_WIDTH-1 downto 0) := unsigned(A_RST_CNT(DATA_WIDTH-1 downto 0));
   signal local_count    : unsigned(DATA_WIDTH-1 downto 0) := min_count;
 
   signal r_event : std_logic;
-  signal r_edge : std_logic;
+  signal r_edge  : std_logic;
 
 begin  -- architecture behavioral
 
@@ -58,7 +59,7 @@ begin  -- architecture behavioral
       else
         --output current counter;
 --        count <= local_count;
-        count <= std_logic_vector(local_count);
+        count   <= std_logic_vector(local_count);
         r_event <= event;
 
         if event = '1' and r_event = '0' then
@@ -68,7 +69,9 @@ begin  -- architecture behavioral
         end if;
 
         -- count
-        if enable = '1' and r_edge = '1' then
+        if enable = '1' and 
+          ((edge_detect = '1' and r_edge = '1') or
+          (edge_detect = '0' and event = '1')) then
 --        if enable = '1' and event = '1' then        
           if local_count = max_count then
             --roll over if requested
@@ -90,7 +93,7 @@ begin  -- architecture behavioral
     elsif clk'event and clk = '1' then  -- rising clock edge
       if reset_sync = '1' then
         -- synchronous reset
-        at_max      <= '0';
+        at_max <= '0';
       else
         -- reset at_max
         at_max <= '0';

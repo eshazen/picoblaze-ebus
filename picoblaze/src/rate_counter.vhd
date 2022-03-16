@@ -45,6 +45,7 @@ begin  -- architecture behavioral
   counter_clk : entity work.counter
     generic map (
       roll_over => '1',
+      edge_detect => '0',
       end_value => std_logic_vector(to_unsigned(CLK_A_1_SECOND, 32)))
     port map (
       clk         => clk_A,
@@ -59,6 +60,7 @@ begin  -- architecture behavioral
   --Reset the value when measure_b is one
   counter_1 : entity work.counter
     generic map (
+      edge_detect => '1',
       roll_over => '0')
     port map (
       clk         => clk_b,
