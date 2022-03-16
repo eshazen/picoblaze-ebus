@@ -45,6 +45,9 @@ begin  -- architecture arch
 
   fg : for i in 0 to NUM_RATE_METER-1 generate
     rate_counter_2 : entity work.rate_counter
+      generic map(
+        CLK_A_1_SECOND => 10_000_000    -- 100ms at 100MHz
+        )
       port map (
         clk_A         => clk,
         clk_B         => clk_b,
