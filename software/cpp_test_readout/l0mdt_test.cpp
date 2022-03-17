@@ -145,7 +145,8 @@ int main(int argc, char** argv)
 
     printf("%ld words received\n", rv.size());
 
-    
+    for( int i=0; i<rv.size(); i++)
+      cout << rv[i] << endl;
 
   } catch (ArgException &e)  // catch any exceptions
     { cerr << "error: " << e.error() << " for arg " << e.argId() << endl; }
