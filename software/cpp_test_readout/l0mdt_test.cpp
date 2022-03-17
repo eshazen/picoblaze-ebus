@@ -40,18 +40,11 @@ int main(int argc, char** argv)
     // Define the command line object.
     CmdLine cmd("Command description message", ' ', "0.9");
 
-    // USB port
-    ValueArg<string> portArg("p","port","Serial port name",false,"/dev/ttyUSB1","port");
-    cmd.add( portArg );
-
-    ValueArg<string> baudArg("b","baud","Baud rate",false,"9600","baud");
-    cmd.add( baudArg );
-
-    ValueArg<string> trigArg("t","trig_prob","Trigger Probability per BX",true,"0.01","fraction");
-    cmd.add( trigArg);
-
-    ValueArg<string> hitArg("m","hit_prob","Hit Probability per clock",true,"1.0","fraction");
-    cmd.add( hitArg);
+    ValueArg<string> dataArg("d","data","Number of data words",false,"64","words");                 cmd.add( dataArg );
+    ValueArg<string> portArg("p","port","Serial port name",false,"/dev/ttyUSB1","port");            cmd.add( portArg );
+    ValueArg<string> baudArg("b","baud","Baud rate",false,"9600","baud");                           cmd.add( baudArg );
+    ValueArg<string> trigArg("t","trig_prob","Trigger Probability per BX",true,"0.01","fraction");  cmd.add( trigArg);
+    ValueArg<string> hitArg("m","hit_prob","Hit Probability per clock",true,"1.0","fraction");      cmd.add( hitArg);
 
     // Parse the args.
     cmd.parse( argc, argv );
@@ -61,6 +54,7 @@ int main(int argc, char** argv)
     string baud = baudArg.getValue();
     double trig_p = atof(trigArg.getValue().c_str());
     double hit_p = atof(hitArg.getValue().c_str());
+    unsigned dwords = strtoul( dataArg.getValue().c_str(), NULL, 0);
 
     unsigned trig_r = (double)0xffffffff * trig_p;
     unsigned hit_r = (double)0xffffffff * hit_p;
@@ -127,6 +121,31 @@ int main(int argc, char** argv)
 
     printf("Expected trigger rate (Hz) = %8.0f  Hit rate (Hz) = %8.0f\n", trig_c, hit_c);
     printf("Measured trigger rate (Hz) = %8d  Hit rate (Hz) = %8d\n", trig_m, hit_m);
+
+    // trigger readout
+    command_vector( sp, "w 3000000a 1"); // trigger readout
+
+    // check addresses
+    rv = command_vector( sp, "r 30000008 2");
+
+    vt = split_string( rv[0], ' ');
+    unsigned write_a = strtoul( vt[1].c_str(), NULL, 16) & 0xffff;
+    vt = split_string( rv[1], ' ');
+    unsigned read_a = strtoul( vt[1].c_str(), NULL, 16) & 0xffff;
+
+    printf("Write addr = %08x  Read addr = %08x\n", write_a, read_a);
+    if( write_a != 0x3ff) {
+      printf("Write buffer not full\n");
+      exit(1);
+    }
+
+    // read data
+    sprintf( buff, "d 0 %x", dwords);
+    rv = command_vector( sp, buff); // read data words
+
+    printf("%ld words received\n", rv.size());
+
+    
 
   } catch (ArgException &e)  // catch any exceptions
     { cerr << "error: " << e.error() << " for arg " << e.argId() << endl; }
