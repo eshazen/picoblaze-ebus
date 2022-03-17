@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <inttypes.h>
 
 #include <string>
 #include <iostream>
@@ -31,6 +32,10 @@ vector<string> split_string(string s, char sep)
     rv.push_back(tmp);
   return (rv);
 }
+
+
+void decode_data( string s);
+
 
 int main(int argc, char** argv)
 {
@@ -146,9 +151,99 @@ int main(int argc, char** argv)
     printf("%ld words received\n", rv.size());
 
     for( int i=0; i<rv.size(); i++)
-      cout << rv[i] << endl;
+      decode_data( rv[i]);
 
   } catch (ArgException &e)  // catch any exceptions
     { cerr << "error: " << e.error() << " for arg " << e.argId() << endl; }
 }
 
+
+
+//
+// decode a string with (9) 32-bit words
+// first is word count
+// then a 256-bit word formatted as 8 32-bit words
+// Upper 230 bits are FELIX data
+// Lower  26 bits are timestamp
+//
+void decode_data( string s)
+{
+  uint64_t w[8];
+  uint64_t ws[8];
+
+  vector<string> vw = split_string( s, ' ');
+
+  if( vw.size() != 9) {
+    cout << "error decoding data: " << s << endl;
+    exit(1);
+  }
+
+  for( int i=0; i<8; i++)
+    w[7-i] = strtoul( vw[i+1].c_str(), NULL, 16);
+
+  // get timestamp
+  uint32_t ts = w[0] & 0x3ffffff;
+
+  // get word type
+  uint8_t wt = (w[7] >> 28) & 0xf;
+
+  // shift raw MDT data
+  for( int i=0; i<7; i++) {
+    ws[i] = (((w[i] >> 26) & 0x3f) | (w[i+1] << 6)) & 0xffffffff;
+  }
+
+//  printf("Raw:  ");
+//  for( int i=0; i<8; i++)
+//    printf(" %08" PRIx64, w[7-i]);
+//  printf("\n");
+//  printf("Shf:  ");
+//  for( int i=0; i<7; i++)
+//    printf(" %08" PRIx64, ws[6-i]);
+//  printf("\n");
+
+  // extract header/trailer data
+  uint64_t htd = ((w[0] >> 26) & 0x3f) | (w[1] << 6);
+
+  uint16_t wmu = (htd >> 36) & 0xff;
+  uint16_t evn = htd & 0xfff;
+  uint16_t bcn = (htd >> 12) & 0xfff;
+  uint16_t orn = (htd >> 24) & 0xfff;
+
+  // extract data hits
+  uint64_t h0 = ws[0] | ((ws[1] << 16) & 0xffff);
+  uint64_t h1 = ((ws[1] >> 16) & 0xffff) | (ws[2] << 16);
+  uint64_t h2 = ws[3] | ((ws[4] << 16) & 0xffff);
+  uint64_t h3 = ((ws[4] >> 16) & 0xffff) | (ws[5] << 16);
+
+  if( wt == 4)
+    printf("\n");
+  printf("TS=%08x ", ts);
+
+  switch( wt) {
+  case 4:
+    putc( 'H', stdout);
+    printf(" WMU=%02x EvN=%03x BcN=%03x OrN=%03x ", wmu, evn, bcn, orn);
+    
+    break;
+  case 8:
+    putchar('D');
+    printf(" %016" PRIx64, h0);
+    printf(" %016" PRIx64, h1);
+    printf(" %016" PRIx64, h2);
+    printf(" %016" PRIx64, h3);
+
+    break;
+  case 0xc:
+    putchar('T');
+    printf(" WMU=%02x EvN=%03x BcN=%03x OrN=%03x ", wmu, evn, bcn, orn);
+
+    break;
+  default:
+    putchar('?');
+
+  }
+
+  printf("\n");
+    
+
+}
